@@ -3,85 +3,98 @@ import { Board } from 'src/app/models/board.model';
 import { Row } from 'src/app/models/row.model';
 import { Tiles } from 'src/app/models/tiles.model';
 import { Candy } from 'src/app/models/candy.model';
-import { v4 as uuid } from 'uuid';
+//import { v4 as uuid } from 'uuid';
 import { CandyType } from 'src/app/models/enum/candytype.enum';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Title } from '@angular/platform-browser';
 import { User } from '../../models/user';
-import { AppService } from '../../app.service';
-import { Router } from "@angular/router";
+import { AppService } from '../../app.service'
+import { Router } from "@angular/router"
 import { ActivatedRoute } from '@angular/router';
-import { subscribeToPromise } from 'rxjs/internal-compatibility';
-import {trigger,state,style,animate,transition,keyframes} from '@angular/animations';
-import { timeout } from 'q';
 
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  keyframes
+} from '@angular/animations';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
   animations: [
+    // animation triggers go here
     trigger('animateCandy', [
       state('blue', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('assets/bluecandy.jpg')"
+        'background-image': "url('bluecandy.jpg')"
       })),
       state('red', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('assets/redcandy.jpg')"
+        'background-image': "url('redcandy.jpg')"
       })),
       state('green', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('assets/Greencandy.png')"
+        'background-image': "url('Greencandy.png')"
       })),
       state('yellow', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('assets/browncandy.png')",
-
+        'background-image': "url('browncandy.png')"
       })),
       state('violet', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('assets/Purplejelly.png')"
+        'background-image': "url('Purplejelly.png')"
       })),
       state('orange', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('assets/candy2.png')"
+        'background-image': "url('candy2.png')"
       })),
-      transition('* => *', [
+      transition('* => nocolor', [
         animate('0.5s', keyframes([
-          style({ transform: 'translateY(25%)'}),
-          style({transform: 'translateY(50%)'}),
-
-          style({transform: 'translateY(75%)'}),
-          style(({opacity: 0})),
-          style({transform: 'translateY(100%)'}),
-          style(({opacity: 0})),
-
+          style({opacity: 0}),
         ]
         ))
+      ]),
+      transition('* => *', [
+        animate('0.5s', keyframes([
+          style({transform: 'translateY(-75%)'}),
+          style({transform: 'translateY(-50%)'}),
+          style({transform: 'translateY(-25%)'}),
+          style({ transform: 'translateY(0%)'})
+        ]
+
+        ))
       ])
+
     ])
   ]
 })
 export class GridComponent implements OnInit {
 
-
-  constructor(private titleService: Title, private user_service: AppService, private router: Router,private route: ActivatedRoute) {
-    this.titleService.setTitle('CandyCrush');
-  }
   board: Board = new Board([])
   numOfRows: number = 6
   numOfColumns: number = 6
-  user: User
   score: number = 0
   turns: number = 10
   scoreToBeat: number = 50
+  user: User;
+  constructor(
+    private titleService: Title,
+    private user_service: AppService,
+    private router: Router,
+  ) {
+    this.titleService.setTitle('CandyCrush');
+  }
 
   getRandomCandy(): CandyType {
     var value = Math.floor(Math.random() * Math.floor(6));
@@ -105,13 +118,13 @@ export class GridComponent implements OnInit {
       this.board.grid[row] = []
       for (var column = 0; column < this.numOfColumns; column++) {
         var candy = new Candy(row, column, this.getRandomCandy())
-        console.log(candy.type)
+        //console.log(candy.type)
         this.board.grid[row][column] = candy
       }
     }
     this.checkGrid();
-    //this.client.fetchUsers().subscribe((users: IUser[]) => {
-    this.user = new User;
+
+
 
     this.user_service.logged()
     .toPromise().then((user) => {this.user = user})
@@ -147,7 +160,7 @@ export class GridComponent implements OnInit {
       console.log(this.turns);
       setTimeout(() => {
         this.shiftCandy();
-      }, 1000);
+      }, 500);
     }
 
   }
@@ -178,7 +191,7 @@ export class GridComponent implements OnInit {
       console.log(this.turns);
       setTimeout(() => {
         this.shiftCandy();
-      }, 1000);
+      }, 600);
     }
   }
 
@@ -210,7 +223,7 @@ export class GridComponent implements OnInit {
       console.log(this.turns);
       setTimeout(() => {
         this.shiftCandy();
-      }, 1000);
+      }, 600);
     }
   }
   onSwipeDown(event, candy: Candy) {
@@ -245,7 +258,7 @@ export class GridComponent implements OnInit {
       console.log(this.turns);
       setTimeout(() => {
         this.shiftCandy();
-      }, 1000);
+      }, 600);
     }
   }
 
@@ -433,7 +446,7 @@ public shiftCandy() {
   }
   setTimeout(() => {
     this.checkGrid();
-  }, 1000);
+  }, 600);
 }
 
 //returns an array of coordinates to delete
@@ -537,7 +550,7 @@ if(removeCandyArr.length != 0){
   console.log(this.score)
   setTimeout(() => {
     this.shiftCandy();
-  }, 1000);
+  }, 600);
 }
 else if(this.turns == 0){
   if(this.score >= this.scoreToBeat){
@@ -556,5 +569,7 @@ public wait(ms) {
 }
 
 }
+
+
 
 

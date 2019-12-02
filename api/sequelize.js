@@ -12,5 +12,6 @@ const User = UserModel(sequelize, Sequelize);
 sequelize.sync()
 .then(()=> {
   console.log('Users db and user table have been created');
-});
+  console.log(sequelize.tables)
+})
 module.exports = User;
