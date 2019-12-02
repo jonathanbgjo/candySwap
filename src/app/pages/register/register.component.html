@@ -1,0 +1,47 @@
+<div class="root">
+        <div class="navbar has-background-dark">
+          <div class="navbar-brand">
+            <div class="navbar-item">
+              <h1 class="app-name has-gradient-text">Candy Crush</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="board">
+            <div class="board-bar">
+                <p class="board-name"><a href routerLink="/" >Home</a></p>
+            </div>
+
+
+            <div class="board-wrapper">
+                <form  (submit)="register()" #loginForm="ngForm">
+                     <br>
+                    <div class="field">
+                        <input type="text" class="input" [(ngModel)]="new_user.email" name="email">
+                      </div>
+                      {{ new_user.email }}
+                      <br>
+                      <div class="field1">
+                        <input type="text" class="input" [(ngModel)]="new_user.password" name="password">
+                        {{ new_user.password }}
+
+                    </div>
+                    <br> <p></p>
+                    <div class="field2">
+                      <input type="text" class="input" [(ngModel)]="new_user.confirmPassword" name="confirmPassword">
+                    </div>
+
+                    {{ new_user.confirmPassword }}
+
+                      <br>
+
+                    <div class="login-button">
+                        <button type="submit" class="button is-danger">Register</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+      </div>
+
+
