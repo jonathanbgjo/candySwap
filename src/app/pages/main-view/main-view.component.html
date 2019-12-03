@@ -3,6 +3,7 @@
       <div class="navbar-brand">
         <div class="navbar-item">
           <h1 class="app-name has-gradient-text">Candy Crush</h1>
+          <a href = '/'> Home</a>
         </div>
       </div>
     </div>
@@ -16,11 +17,13 @@
 
             <div class="login_box" >
                 <div class="field">
+                  <p>Username/Email</p>
                     <input type="text" name="email" class="input" [(ngModel)]="user.email">
                 </div>
                 {{user.email}}
 
                  <div class="field1">
+                   <p>Password</p>
                     <input type="text" name="password" class="input" [(ngModel)]="user.password">
                 </div>
                 {{user.password }}

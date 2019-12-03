@@ -7,11 +7,15 @@
 
       </div>
     </div>
-
     <div class="board">
       <div class="board-bar">
        <!--  <p class="board-name"><a href routerLink="register">Register</a></p>-->
       </div>
+
+      <span *ngFor='let users of users; let idx = index'>
+          <a href = "/user/{{users.user_id}}">{{users.email}} </a><br>
+      </span>
+
       <div class="board-wrapper">
           <div class = "game-stats">
             <div>
@@ -41,10 +45,14 @@
 
               </div>
             </div>
-            {{this.user.user_id}}  {{this.user.email}}          {{this.user.password}}
           </div>
         </div>
       </div>
+      {{this.user.user_id}} {{this.user.email}}   {{this.user.password}}
+
     </div>
 
     <a href ='/logout'>logout</a>
+  <button (click) ="logout()"> Logout</button>
+
+</div>

@@ -17,17 +17,20 @@
                 <form  (submit)="register()" #loginForm="ngForm">
                      <br>
                     <div class="field">
+                        <p> Email</p>
                         <input type="text" class="input" [(ngModel)]="new_user.email" name="email">
                       </div>
                       {{ new_user.email }}
                       <br>
                       <div class="field1">
+                        <p> Password</p>
                         <input type="text" class="input" [(ngModel)]="new_user.password" name="password">
                         {{ new_user.password }}
 
                     </div>
                     <br> <p></p>
                     <div class="field2">
+                      <p>Confirm Password</p>
                       <input type="text" class="input" [(ngModel)]="new_user.confirmPassword" name="confirmPassword">
                     </div>
 
@@ -42,6 +45,6 @@
                 </form>
             </div>
         </div>
-      </div>
+</div>
 
 

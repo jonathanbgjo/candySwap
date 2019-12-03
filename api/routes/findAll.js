@@ -5,6 +5,7 @@ module.exports = (app) => {
     console.log("are we in get all");
     //console.log(req);
     User.findAll().then(users => {
+      console.log("in find all")
       console.log(users)
 
       res.send(users);

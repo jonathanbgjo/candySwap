@@ -88,6 +88,7 @@ export class GridComponent implements OnInit {
   turns: number = 10
   scoreToBeat: number = 50
   user: User;
+  users: User[];
   constructor(
     private titleService: Title,
     private user_service: AppService,
@@ -128,12 +129,19 @@ export class GridComponent implements OnInit {
 
     this.user_service.logged()
     .toPromise().then((user) => {this.user = user})
-    .catch(err=> {console.log("user logged error in grid component", this.router.navigate['/logout'])})
+    .catch(err=> {this.router.navigate['/logout']})
     console.log("INSIDE GRID COMPONENT. SEEING USER")
+    console.log('user in session')
     console.log(this.user)
 
+    this.user_service.getAllUsers()
+    .toPromise().then((users) => { this.users = users})
+    .catch(err=> {this.router.navigate['/']})
   }
 
+  logout(){
+    this.user_service.logout();
+  }
   onSwipeLeft(event, candy: Candy) {
     if (candy.y == 0 || this.turns == 0) {
       return
@@ -449,7 +457,7 @@ public shiftCandy() {
   }, 600);
 }
 
-//returns an array of coordinates to delete
+//returns an array of coordinates to delete//returns an array of coordinates to delete
 public checkGrid(){
   let removeCandyArr = [];
   var vdict = {}; var hcount = 0; var hArr = []; let colorMarker = CandyType.nocolor;
@@ -558,8 +566,12 @@ else if(this.turns == 0){
   }else{
     alert("YOU LOSE")
   }
+}else{
+  this.checkValidGrid()
 }
 }
+
+
 public wait(ms) {
   var start = Date.now(),
       now = start;
@@ -568,6 +580,134 @@ public wait(ms) {
   }
 }
 
+public checkValidGrid(){
+
+  //check each candy
+  for(let i = 0; i < this.numOfRows; i++){
+    for(let j = 0; j < this.numOfColumns; j++){
+
+      //checks if there is a candy adjacent and if so, if there is any candy that can be moved on the other side
+      //to make a 3 in a row
+
+      //adjacent is right so checks candies left
+      if(j+1 < this.numOfColumns){
+        if(this.board.grid[i][j+1].type == this.board.grid[i][j].type){
+          if(j-2 >= 0){
+            if(this.board.grid[i][j-2].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i - 1 >= 0 && j-1 >= 0){
+            if(this.board.grid[i-1][j-1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i+1 < this.numOfRows && j-1 >=0){
+            if(this.board.grid[i+1][j-1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+        }
+      }
+      //adjacent is left so checks candies right
+      if(j-1>=0){
+        if(this.board.grid[i][j-1].type == this.board.grid[i][j].type){
+          if(j+2 < this.numOfColumns){
+            if(this.board.grid[i][j+2].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i-1 >=0 && j+1 < this.numOfColumns){
+            if(this.board.grid[i-1][j+1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i+1 < this.numOfRows && j+1 < this.numOfColumns){
+            if(this.board.grid[i+1][j+1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+        }
+      }
+      //adjacent is below so checks candies above
+      if(i+1 < this.numOfRows){
+        if(this.board.grid[i+1][j].type == this.board.grid[i][j].type){
+          if(i-2 >= 0){
+            if(this.board.grid[i-2][j].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i-1 >= 0 && j-1 >= 0){
+            if(this.board.grid[i-1][j-1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i-1 >= 0 && j+1 < this.numOfColumns){
+            if(this.board.grid[i-1][j+1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+        }
+      }
+      //adjacent is above so checks candies below
+      if(i-1>=0){
+        if(this.board.grid[i-1][j].type == this.board.grid[i][j].type){
+          if(i+2 < this.numOfRows){
+            if(this.board.grid[i+2][j].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i+1 < this.numOfRows && j-1 >= 0){
+            if(this.board.grid[i+1][j-1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+          if(i+1 < this.numOfRows && j+1 < this.numOfColumns){
+            if(this.board.grid[i+1][j+1].type == this.board.grid[i][j].type){
+              return
+            }
+          }
+        }
+      }
+
+      //checks to see if candy can be moved between two candies to make a 3 in a row
+
+      //above
+      if(i-1 >= 0){
+        if(j-1 >= 0 && j+1 < this.numOfColumns){
+          if(this.board.grid[i-1][j-1].type == this.board.grid[i][j].type && this.board.grid[i-1][j+1].type == this.board.grid[i][j].type){
+            return
+          }
+        }
+      }
+      //below
+      if(i+1 < this.numOfRows){
+        if(j-1 >= 0 && j+1 < this.numOfColumns){
+          if(this.board.grid[i+1][j-1].type == this.board.grid[i][j].type && this.board.grid[i+1][j+1].type == this.board.grid[i][j].type){
+            return
+          }
+        }
+      }
+      //left
+      if(j-1 >= 0){
+        if(i-1 >= 0 && i+1 < this.numOfRows){
+          if(this.board.grid[i-1][j-1].type == this.board.grid[i][j].type && this.board.grid[i+1][j-1].type == this.board.grid[i][j].type){
+            return
+          }
+        }
+      }
+      //right
+      if(j+1 < this.numOfColumns){
+        if(i-1 >= 0 && i+1 < this.numOfRows){
+          if(this.board.grid[i-1][j+1].type == this.board.grid[i][j].type && this.board.grid[i+1][j+1].type == this.board.grid[i][j].type){
+            return
+          }
+        }
+      }
+    }
+  }
+  alert("no more moves available")
+}
 }
 
 

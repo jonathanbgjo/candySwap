@@ -23,21 +23,13 @@ module.exports = (app) => {
               if(req.body.password === user.password){
                 //req.session.user = user;
                 console.log("HEY WE SAVED IN SESSION");
-                console.log("session.cookie")
-                console.log(session)
-                if(!session.user){
                 session.user = user;
-                console.log('made it past request.session')
-                console.log(session.id)
-                console.log(session);
                 //   session.save()
                 //     console.log('saved?!')
                 //  }
-
                 console.log(session.user);
+                console.log("at the end of login")
                 res.status(200).send(session.user);
-                }
-
             }else {
               console.log('user not found in db');
               res
@@ -64,13 +56,14 @@ module.exports = (app) => {
 
   app.get('/logged', (req,res) =>{
     console.log("in logged route")
-    console.log(req.params);
-    console.log(session.id)
+    // console.log(req.params);
+    // console.log(session.id)
 
-    console.log(session)
-    console.log(session.user)
+    // console.log(session)
+    // console.log(session.user)
 
     if(session.user){
+      console.log(session.user);
       res.status(200).send(session.user)
     }else{
       console.log("request.session user doesnt exist")
@@ -79,8 +72,8 @@ module.exports = (app) => {
   })
 
   app.get('/logout', (req,res) => {
-    session.destroy();
-    res.navigate(['http://localhost:4200/']);
+    session = null;
+    res.navigate(['/']);
   })
 }
 

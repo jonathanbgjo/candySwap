@@ -22,7 +22,7 @@ export class AppService {
     return this.http.post<User>('http://localhost:8000/register', new_user)
   }
   getAllUsers(){
-    return this.http.get<User[]>('/api/users')
+    return this.http.get<User[]>('http://localhost:8000/api/users')
   }
   login(user: User): Observable<User>{
     console.log("reach login in service");
@@ -35,9 +35,9 @@ export class AppService {
   logout(){
     return this.http.get('http://localhost:8000/logout');
   }
-  getUser(user: User){
+  getUser(user_id: number){
     console.log("in get one user service");
-    return this.http.get<User>('/api/user/' + user.user_id)
+    return this.http.get<User>('http://localhost:8000/user/' + user_id)
   }
 
   updateUser(user: User): Observable<void> {

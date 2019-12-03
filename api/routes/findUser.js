@@ -10,7 +10,7 @@
 var User = require('../sequelize');
 
 module.exports = (app) => {
-    app.get('/api/user/:id', (req, res, next) => {
+    app.get('/user/:id', (req, res, next) => {
       console.log(req.params);
       if (req.params.id) {
         User.findOne({
@@ -23,11 +23,7 @@ module.exports = (app) => {
             console.log(user);
             if (user != null) {
               console.log('user found in db');
-              res.status(200).send({
-                auth: true,
-                username: user.username,
-                message: 'user found in db',
-              });
+              res.status(200).send(user);
             } else {
               console.log('user not found in db');
               res

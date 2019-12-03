@@ -15,6 +15,7 @@ import { FormsModule }   from '@angular/forms';
 import { AppService} from './app.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserComponent } from './pages/user/user.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -28,6 +29,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MainViewComponent,
     RegisterComponent,
     GridComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

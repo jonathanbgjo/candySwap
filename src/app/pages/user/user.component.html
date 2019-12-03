@@ -1,0 +1,49 @@
+
+<div class="root">
+  <div class="navbar has-background-dark">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <h1 class="app-name has-gradient-text">Candy Crush</h1>
+        <a href="/">Home</a>
+        <a href="/grid">Grid</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="board">
+
+
+      <h1>USER PROFILE!</h1>
+      <p>user id: {{userProfile.user_id}}</p>
+      <p>username: {{userProfile.username}}</p>
+      <p>email: {{userProfile.email}}</p>
+      <p>password: {{userProfile.password}}</p>
+
+    </div>
+
+    <div *ngIf ="show" class="board-wrapper">
+      <form  (submit)="update()" #loginForm="ngForm">
+
+        <div class="login_box" >
+            <div class="field">
+              <p>Email</p>
+                <input type="text" name="email" class="input" [(ngModel)]="user.email">
+            </div>
+            {{user.email}}
+
+             <div class="field1">
+               <p>Password</p>
+                <input type="text" name="password" class="input" [(ngModel)]="user.password">
+            </div>
+            {{user.password }}
+
+               <div class="login-button">
+                <button type="submit" class="button is-danger">Login</button>
+               </div>
+        </div>
+        </form>
+
+  </div>
+</div>
+
+
