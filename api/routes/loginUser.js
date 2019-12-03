@@ -56,11 +56,6 @@ module.exports = (app) => {
 
   app.get('/logged', (req,res) =>{
     console.log("in logged route")
-    // console.log(req.params);
-    // console.log(session.id)
-
-    // console.log(session)
-    // console.log(session.user)
 
     if(session.user){
       console.log(session.user);
@@ -72,8 +67,8 @@ module.exports = (app) => {
   })
 
   app.get('/logout', (req,res) => {
-    session = null;
-    res.redirect("/")
+    session.destroy();
+    res.redirect("/");
   })
 }
 

@@ -16,11 +16,6 @@ module.exports = (sequelize, type) => {
       allowNull: true,
       defaultValue: " ",
     },
-    confirmPassword:{
-      type: type.STRING,
-      allowNull: true,
-      defaultValue: " ",
-    },
     createdAt: type.DATE,
     updatedAt: type.DATE,
   })

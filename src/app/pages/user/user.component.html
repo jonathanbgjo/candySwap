@@ -11,30 +11,32 @@
   </div>
 
   <div class="board">
-    FIND OUT WHY YOU CANT STORE THE USERS FROM SERVICE FUNCTIONS. FIND OUT NEXT TIME ON ---- PTG SEASON 3
-
       <h1>USER PROFILE!</h1>
       <p>user id: {{this.userProfile.user_id}}</p>
       <p>username: {{this.userProfile.username}}</p>
       <p>email: {{this.userProfile.email}}</p>
       <p>password: {{this.userProfile.password}}</p>
-
+    {{arr | json}}
+    {{arr}}
     <div *ngIf ="show" class="board-wrapper">
       <form  (submit)="update()" #loginForm="ngForm">
 
         <div class="login_box" >
             <div class="field">
               <p>Email</p>
-                <input type="text" name="email" class="input" [(ngModel)]="user.email">
+                <input type="text" name="email" class="input" [(ngModel)]="user.email" placeholder = {{this.userProfile.email}}>
             </div>
             {{user.email}}
 
              <div class="field1">
                <p>Password</p>
-                <input type="text" name="password" class="input" [(ngModel)]="user.password">
+                <input type="text" name="password" class="input" [(ngModel)]="user.password" placeholder = {{this.userProfile.password}}>
             </div>
             {{user.password }}
-
+            <div class="field1">
+              <p>Password</p>
+               <input type="text" name="confirmPassword" class="input" [(ngModel)]="user.confirmPassword" placeholder = {{this.userProfile.password}}>
+           </div>
                <div class="login-button">
                 <button type="submit" class="button is-danger">Login</button>
                </div>

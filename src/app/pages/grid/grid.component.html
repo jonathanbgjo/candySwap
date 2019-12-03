@@ -12,7 +12,7 @@
        <!--  <p class="board-name"><a href routerLink="register">Register</a></p>-->
       </div>
       <ul>
-        <li *ngFor="let users of users let idx = index"><a href = "/user/{{users.user_id}}">{{users.email}} </a></li>
+        <li *ngFor="let users of users let idx = index"><a href = "/user/{{users.user_id}}"> {{idx}} {{users.email}} </a></li>
       </ul>
 
       <div class="board-wrapper">
@@ -44,6 +44,7 @@
 
               </div>
             </div>
+            <a href = "/grid">Reset</a>
           </div>
         </div>
       </div>

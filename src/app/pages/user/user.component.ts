@@ -16,7 +16,6 @@ export class UserComponent implements OnInit {
   userProfile: User;
   sessionUser: User;
   show: boolean = false;
-
   constructor(private user_service: AppService,private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -32,21 +31,17 @@ export class UserComponent implements OnInit {
     this.userProfile = new User();
     //try to put into promise. causing error trying to find user_id before it fetches data
     this.user_service.getUser(parseInt(this.route.snapshot.paramMap.get('user_id')))
-    .toPromise().then((user) => {console.log(user)})
-    .catch(err=> console.log("user profile component error", err))
-    console.log("userProfile")
-    console.log(this.userProfile);
+    .subscribe(user => {this.userProfile = user; console.log(this.userProfile)} );
 
     this.user_service.logged()
-    .toPromise().then((user) => {this.sessionUser = user})
-    .catch(err => console.log("user service logged in user profile component error"))
-
-
-    console.log('sessionuser');
-    console.log(this.sessionUser);
-    if(this.sessionUser.user_id == this.userProfile.user_id){
+    .subscribe(user => {this.sessionUser = user;
+      if(this.sessionUser.user_id == this.userProfile.user_id){
       this.show = true;
-    }
+      }});
+      let arr = [['1','2','3','4'],
+                ['5','6','7','8'],
+                ['1','2','3','4'],
+                ['5','6','7','8']];
   }
 
 // this.user_service.getUser(id)
