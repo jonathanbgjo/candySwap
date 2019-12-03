@@ -129,7 +129,7 @@ export class GridComponent implements OnInit {
 
     this.user_service.logged()
     .toPromise().then((user) => {this.user = user})
-    .catch(err=> {this.router.navigate['/logout']})
+    .catch(err=> {this.user_service.logout()})
     console.log("INSIDE GRID COMPONENT. SEEING USER")
     console.log('user in session')
     console.log(this.user)
@@ -137,6 +137,9 @@ export class GridComponent implements OnInit {
     this.user_service.getAllUsers()
     .toPromise().then((users) => { this.users = users})
     .catch(err=> {this.router.navigate['/']})
+
+    console.log('users in grid')
+    console.log(this.users);
   }
 
   logout(){

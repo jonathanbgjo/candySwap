@@ -8,7 +8,7 @@ module.exports = (app) => {
       console.log("in find all")
       console.log(users)
 
-      res.send(users);
+      res.json(users);
     })
     .catch(err => {
       console.log('problem with get all');

@@ -29,12 +29,12 @@ module.exports = (app) => {
                 //  }
                 console.log(session.user);
                 console.log("at the end of login")
-                res.status(200).send(session.user);
+                res.status(200).json(session.user);
             }else {
               console.log('user not found in db');
               res
                 .status(404)
-                .send({ auth: false, message: 'no user with that username' });
+                .json({ auth: false, message: 'no user with that username' });
             }
           }
        })
@@ -45,7 +45,7 @@ module.exports = (app) => {
         });
     }
     else {console.log("???")
-      return res.status(500).send({
+      return res.status(500).json({
         auth: false,
         message: 'username and token id do not match',
 
@@ -64,7 +64,7 @@ module.exports = (app) => {
 
     if(session.user){
       console.log(session.user);
-      res.status(200).send(session.user)
+      res.status(200).json(session.user)
     }else{
       console.log("request.session user doesnt exist")
       res.status(401).json(false);
@@ -73,7 +73,7 @@ module.exports = (app) => {
 
   app.get('/logout', (req,res) => {
     session = null;
-    res.navigate(['/']);
+    res.redirect("/")
   })
 }
 

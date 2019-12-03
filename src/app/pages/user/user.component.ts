@@ -29,9 +29,10 @@ export class UserComponent implements OnInit {
     console.log("------------------------------route params------------------------------")
     //this.userProfile = new User();
     this.user = new User();
+    this.userProfile = new User();
     //try to put into promise. causing error trying to find user_id before it fetches data
     this.user_service.getUser(parseInt(this.route.snapshot.paramMap.get('user_id')))
-    .toPromise().then((user) => {this.userProfile = user})
+    .toPromise().then((user) => {console.log(user)})
     .catch(err=> console.log("user profile component error", err))
     console.log("userProfile")
     console.log(this.userProfile);

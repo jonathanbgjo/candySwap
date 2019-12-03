@@ -11,10 +11,9 @@
       <div class="board-bar">
        <!--  <p class="board-name"><a href routerLink="register">Register</a></p>-->
       </div>
-
-      <span *ngFor='let users of users; let idx = index'>
-          <a href = "/user/{{users.user_id}}">{{users.email}} </a><br>
-      </span>
+      <ul>
+        <li *ngFor="let users of users let idx = index"><a href = "/user/{{users.user_id}}">{{users.email}} </a></li>
+      </ul>
 
       <div class="board-wrapper">
           <div class = "game-stats">

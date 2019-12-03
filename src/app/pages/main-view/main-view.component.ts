@@ -40,7 +40,8 @@ export class MainViewComponent implements OnInit {
   	this.user_service.login(this.user)
   		.toPromise().then((user) => this.router.navigate(["/grid"]))
       .catch(err=> console.log("user login error", err))
-
+      console.log("LOGIN COMPONENT")
+      console.log(this.user)
     //   this.user_service.login(this.user).subscribe( data => {
     //     data = this.user
     //   },err =>{

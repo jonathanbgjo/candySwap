@@ -29,7 +29,7 @@ module.exports = (app) => {
       }))
       console.log(created);
     })
-    res.send(data.user_id);
+    res.json(data.user_id);
   })
 }
   // app.post('http://localhost:8000/register', (req,res) => {

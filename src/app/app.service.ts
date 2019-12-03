@@ -17,25 +17,25 @@ export class AppService {
   doSomething(){
     //return this.http.get<User>
   }
-  register(new_user: User){
+  register(new_user: User): Observable<User>{
     console.log("register reach service?")
     return this.http.post<User>('http://localhost:8000/register', new_user)
   }
-  getAllUsers(){
+  getAllUsers(): Observable<User[]>{
     return this.http.get<User[]>('http://localhost:8000/api/users')
   }
   login(user: User): Observable<User>{
     console.log("reach login in service");
     return this.http.post<User>('http://localhost:8000/login', user);
   }
-  logged(){
+  logged(): Observable<User>{
     console.log("reached logged inservice");
     return this.http.get<User>('http://localhost:8000/logged');
   }
   logout(){
     return this.http.get('http://localhost:8000/logout');
   }
-  getUser(user_id: number){
+  getUser(user_id: number): Observable<User>{
     console.log("in get one user service");
     return this.http.get<User>('http://localhost:8000/user/' + user_id)
   }

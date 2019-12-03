@@ -11,15 +11,13 @@
   </div>
 
   <div class="board">
-
+    FIND OUT WHY YOU CANT STORE THE USERS FROM SERVICE FUNCTIONS. FIND OUT NEXT TIME ON ---- PTG SEASON 3
 
       <h1>USER PROFILE!</h1>
-      <p>user id: {{userProfile.user_id}}</p>
-      <p>username: {{userProfile.username}}</p>
-      <p>email: {{userProfile.email}}</p>
-      <p>password: {{userProfile.password}}</p>
-
-    </div>
+      <p>user id: {{this.userProfile.user_id}}</p>
+      <p>username: {{this.userProfile.username}}</p>
+      <p>email: {{this.userProfile.email}}</p>
+      <p>password: {{this.userProfile.password}}</p>
 
     <div *ngIf ="show" class="board-wrapper">
       <form  (submit)="update()" #loginForm="ngForm">
@@ -42,7 +40,7 @@
                </div>
         </div>
         </form>
-
+    </div>
   </div>
 </div>
 

@@ -23,12 +23,12 @@ module.exports = (app) => {
             console.log(user);
             if (user != null) {
               console.log('user found in db');
-              res.status(200).send(user);
+              res.status(200).json(user);
             } else {
               console.log('user not found in db');
               res
                 .status(404)
-                .send({ auth: false, message: 'no user with that username' });
+                .json({ auth: false, message: 'no user with that username' });
             }
           })
           .catch(err => {
@@ -37,7 +37,7 @@ module.exports = (app) => {
             res.status(500).json(err);
           });
       } else {
-        return res.status(500).send({
+        return res.status(500).json({
           auth: false,
           message: 'username and token id do not match',
         });
