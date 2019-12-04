@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Inject } from '@angular/core';
+
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { User } from './models/user';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+
 })
 export class AppService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  @Inject(MatDialog) public dialog: MatDialog) { }
   // register(new_user: User){
   //   return this.http.post("/register", new_user).map(data => data).toPromise()
   // }
@@ -39,9 +45,10 @@ export class AppService {
     console.log("in get one user service");
     return this.http.get<User>('http://localhost:8000/user/' + user_id)
   }
-
-  updateUser(user: User): Observable<void> {
-    return this.http.put<void>('http://localhost:8000/api/users/' + user.user_id, user)
+  updateUser(user: User): Observable<User> {
+    console.log("in update service")
+    console.log(user.user_id);
+    return this.http.put<User>('http://localhost:8000/user/' + user.user_id, user)
   }
 
   deleteUser(user: User) {

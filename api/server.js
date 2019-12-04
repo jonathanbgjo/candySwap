@@ -23,7 +23,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
-// Another thing you'll need to think of, is CORS (Cross Origin Resource Sharing). Since your backend and frontend will live at different domains / different ports, you'll need to enable CORS in the backend. This can easily be achieved with Express like this:
+// Another thing you'll need to think of, is CORS (Cross Origin Resource Sharing).
+//Since your backend and frontend will live at different domains / different ports, you'll need to enable CORS in the backend.
+//This can easily be achieved with Express like this:
 
 // const cors = require('cors');
 //       const app = express();
@@ -31,11 +33,12 @@ app.use(bodyParser.json())
 //   "http://localhost:4736"
 // ], credentials: true}));
 
-
+//sequelize syntax
 require('./routes/registerUser')(app);
 require('./routes/findUser')(app);
 require('./routes/findAll')(app);
 require('./routes/loginUser')(app);
+require('./routes/updateUser')(app);
 
 // require('./routes/deleteUser')(app);
 // require('./routes/updateUser')(app);

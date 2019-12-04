@@ -16,6 +16,10 @@ import { AppService} from './app.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from './pages/user/user.component';
+import { DialogComponent } from './pages/dialog/dialog.component';
+import { DialoglooseComponent } from './pages/dialogloose/dialogloose.component';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { MapComponent } from './pages/map/map.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -30,6 +34,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     RegisterComponent,
     GridComponent,
     UserComponent,
+    DialogComponent,
+    DialoglooseComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,12 @@ export class MyHammerConfig extends HammerGestureConfig {
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    DialogComponent,
+    DialoglooseComponent,
   ],
   providers: [AppService,
     {provide: HAMMER_GESTURE_CONFIG,

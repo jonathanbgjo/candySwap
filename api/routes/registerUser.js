@@ -9,7 +9,7 @@ const someOtherPlaintextPassword = 'not_bacon';
 module.exports = (app) => {
   app.post('/register', (req,res)=>{
     console.log("are we in register?")
-    console.log(req);
+    //console.log(req);
     const data = {
           user_id: req.body.user_id,
           username : req.body.username,

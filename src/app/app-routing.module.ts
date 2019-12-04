@@ -4,7 +4,7 @@ import { MainViewComponent } from './pages/main-view/main-view.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { GridComponent } from './pages/grid/grid.component';
 import { UserComponent} from './pages/user/user.component';
-
+import { MapComponent} from './pages/map/map.component';
 const routes: Routes = [
   {
     path:'register',
@@ -24,6 +24,9 @@ const routes: Routes = [
   {
     path:'user/:user_id',
     component: UserComponent
+  }, {
+    path:'grid/map',
+    component:MapComponent
   }
 ];
 

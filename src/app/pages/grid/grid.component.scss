@@ -46,8 +46,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  width: 450px;
-  height: 300px;
+ // width: 450px;
+ // height: 300px;
   width: 385px;
   height: 385px;
   background: rgba(white,0.5);
@@ -93,7 +93,7 @@
 }
 
 .greenTiles {
-  background-image: url('src/assets/Greencandy.png');
+ background-image: url('src/assets/Greencandy.png');
   //background: green;
   background-repeat: no-repeat;
   background-position: center-top;
@@ -109,7 +109,7 @@
   height: 60px; // any height
 }
 .violetTiles {
-  background-image: url('src/assets/Purplejelly.png');
+ background-image: url('src/assets/Purplejelly.png');
   //background: green;
   background-repeat: no-repeat;
   background-position: center-top;
@@ -117,7 +117,7 @@
   height: 60px; // any height
 }
 .orangeTiles {
-  background-image: url('src/assets/candy2.png');
+ background-image: url('src/assets/candy2.png');
   //background: green;
   background-repeat: no-repeat;
   background-position: center-top;
@@ -129,16 +129,35 @@
   flex-direction: row;
 }
 .grid_cell:hover{
-  // background-color: yellow; /* make this whatever you want */
-   opacity: 0.3;
-   cursor: pointer;
-  // transform: scale(1.5);
+ // background-color: yellow; /* make this whatever you want */
+  opacity: 0.3;
+  cursor: pointer;
+ // transform: scale(1.5);
+  }
+.stats{
+  float: right;
+
+  padding: 15px;
+  display: block;
+  font-size: 15px;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  color:#a42af5;
+
 }
 .game-stats{
-  color: #a42af5;
-  //display: flex;
+  //float: right;
+
+  position: absolute;
+  right: 0;
+}
+.level{
   text-align: center;
-  float: right;
-  justify-items: center;
-  align-items: center;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  color:#a42af5;
+}
+a:hover {
+  color: hotpink;
 }
