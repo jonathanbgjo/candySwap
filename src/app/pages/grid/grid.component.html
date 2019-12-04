@@ -39,14 +39,15 @@
               </div>
             </div>
           </div>
+          <a href = "/grid">Reset</a> <br>
+
         </div>
 
       </div>
-      <a href = "/grid">Reset</a> <br>
       id:  {{this.user.user_id}}   email: {{this.user.email}}    password: {{this.user.password}} <br>
-      <a href ='/logout'>logout</a>
-        <button (click) ="logout()"> Logout</button>
-
+      <form (submit)="logout()" #loginForm="ngForm">
+          <button type="submit" class="button is-danger">Logout</button>
+      </form>
 
     </div>
 </div>

@@ -67,8 +67,8 @@ module.exports = (app) => {
   })
 
   app.get('/logout', (req,res) => {
+    console.log("in logout route/server.js")
     session.destroy();
-    res.redirect("/");
   })
 }
 

@@ -42,6 +42,8 @@ export class UserComponent implements OnInit {
       }})
     .catch(err => {this.router.navigate([""])})
 
+    // console.log(this.sessionUser)
+    // console.log(this.userProfile)
     // this.user_service.logged()
     // .subscribe(user => {this.sessionUser = user;
 
@@ -55,6 +57,21 @@ export class UserComponent implements OnInit {
   		.catch(err=> {console.log("user update error", err)})
     }
   }
+  logout(){
+    this.user_service.logout()
+    .toPromise().then(() => this.router.navigate(["/"]))
+    .catch(err=> console.log("user logout error", err))
+
+  }
+  delete(){
+    if(this.sessionUser.user_id == this.userProfile.user_id){
+      this.user_service.deleteUser(this.sessionUser)
+      .toPromise().then( () => this.router.navigate(['/']))
+      .catch(err => console.log("user delete error. user component.ts", err))
+    }
+
+  }
+
 // this.user_service.getUser(id)
 // .then((user) => this.user = user)
 // .catch(err=> console.log("user login error", err))

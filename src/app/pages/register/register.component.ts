@@ -28,9 +28,7 @@ export class RegisterComponent implements OnInit {
   	this.user = new User
     this.flag = false
 
-    this.user_service.logged()
-    .toPromise().then((user) => {this.user = user; console.log(this.user)})
-    .catch(err => {this.router.navigate([""])})
+
   }
 
   register(){

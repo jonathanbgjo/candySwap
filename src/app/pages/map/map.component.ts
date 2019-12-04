@@ -24,6 +24,10 @@ users:User[];
     .subscribe(users => {this.users = users;})
   }
   logout(){
-    this.user_service.logout();
+    this.user_service.logout()
+    .toPromise().then(() => this.router.navigate(["/"]))
+    .catch(err=> console.log("user logout error", err))
+
   }
+
 }

@@ -38,8 +38,9 @@ export class AppService {
     console.log("reached logged inservice");
     return this.http.get<User>('http://localhost:8000/logged');
   }
-  logout(){
-    return this.http.get('http://localhost:8000/logout');
+  logout(): Observable<void>{
+    console.log("in logout service")
+    return this.http.get<void>('http://localhost:8000/logout');
   }
   getUser(user_id: number): Observable<User>{
     console.log("in get one user service");
@@ -51,7 +52,8 @@ export class AppService {
     return this.http.put<User>('http://localhost:8000/user/' + user.user_id, user)
   }
 
-  deleteUser(user: User) {
-    return this.http.delete('http://localhost:8000/api/users/' + user.user_id)
+  deleteUser(user: User):Observable<User>{
+    console.log("delete service")
+    return this.http.delete<User>('http://localhost:8000/user/' + user.user_id)
   }
 }

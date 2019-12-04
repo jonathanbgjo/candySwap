@@ -52,7 +52,7 @@ export class MainViewComponent implements OnInit {
   }
   logout(){
     this.user_service.logout()
-    .toPromise().then((user) => this.router.navigate(["/"]))
+    .toPromise().then(() => this.router.navigate(["/"]))
     .catch(err=> console.log("user logout error", err))
 
   }

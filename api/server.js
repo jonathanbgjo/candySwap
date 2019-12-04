@@ -39,9 +39,7 @@ require('./routes/findUser')(app);
 require('./routes/findAll')(app);
 require('./routes/loginUser')(app);
 require('./routes/updateUser')(app);
-
-// require('./routes/deleteUser')(app);
-// require('./routes/updateUser')(app);
+require('./routes/deleteUser')(app);
 
 
 app.listen(8000, () => {

@@ -133,8 +133,12 @@ export class GridComponent implements OnInit {
   }
 
   logout(){
-    this.user_service.logout();
+    this.user_service.logout()
+    .toPromise().then(() => this.router.navigate(["/"]))
+    .catch(err=> console.log("user logout error", err))
+
   }
+
   onSwipeLeft(event, candy: Candy) {
     if (candy.y == 0 || this.turns == 0) {
       return
@@ -714,13 +718,13 @@ export class GridComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.dialog.open(DialoglooseComponent, dialogConfig);
    }
-   public slideDown(x:number, y:number){
-    var temp:string =  x.toString() + y.toString()
-    document.getElementById(temp).animate([
-      {transform: 'translateY(-75%)'},
-      { transform: 'translateY(0%)'}
-    ],{
-    duration: 600
-    });
-  }
+  //  public slideDown(x:number, y:number){
+  //   var temp:string =  x.toString() + y.toString()
+  //   document.getElementById(temp).animate([
+  //     {transform: 'translateY(-75%)'},
+  //     { transform: 'translateY(0%)'}
+  //   ],{
+  //   duration: 600
+  //   });
+  // }
 }

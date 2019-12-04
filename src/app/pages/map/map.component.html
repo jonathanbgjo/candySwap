@@ -36,10 +36,11 @@
       <ul>
           <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{idx+1}}">{{user.email}}</a> {{idx}}</li>
       </ul>
-
-      <a href = "/grid">Reset</a> <br>
-      {{this.user.user_id}} {{this.user.email}}   {{this.user.password}} <br>
+      <br>
+      User in Session:
+      ID: {{this.user.user_id}} EMAIL:{{this.user.email}} PASSWORD:  {{this.user.password}} <br>
       <a href ='/logout'>logout</a>
-        <button (click) ="logout()"> Logout</button>
-
+      <form (submit)="logout()" #loginForm="ngForm">
+        <button type="submit" class="button is-danger">Logout</button>
+      </form>
     </div>
