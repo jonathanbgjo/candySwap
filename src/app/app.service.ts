@@ -38,9 +38,9 @@ export class AppService {
     console.log("reached logged inservice");
     return this.http.get<User>('http://localhost:8000/logged');
   }
-  logout(): Observable<void>{
+  logout(){
     console.log("in logout service")
-    return this.http.get<void>('http://localhost:8000/logout');
+    return this.http.get('http://localhost:8000/logout');
   }
   getUser(user_id: number): Observable<User>{
     console.log("in get one user service");

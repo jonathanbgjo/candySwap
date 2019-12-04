@@ -15,7 +15,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { DialoglooseComponent } from '../dialogloose/dialogloose.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {trigger,state,style,animate,transition,keyframes} from '@angular/animations';
-//import { timeout } from 'q';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-grid',
@@ -721,10 +721,16 @@ export class GridComponent implements OnInit {
    public slideDown(x:number, y:number){
     var temp:string =  x.toString() + y.toString()
     document.getElementById(temp).animate([
-      {transform: 'translateY(-75%)'},
-      { transform: 'translateY(0%)'}
+      // {transform: 'translateY(-75%)'},
+      // { transform: 'translateY(0%)'}
     ],{
     duration: 600
     });
   }
 }
+
+// {transform: 'translateY(-75%)'},
+// { transform: 'translateY(0%)'}
+
+// npm WARN @angular/animations@8.2.14 requires a peer of @angular/core@8.2.14
+// but none is installed. You must install peer dependencies yourself.

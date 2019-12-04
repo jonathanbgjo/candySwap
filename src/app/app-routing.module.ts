@@ -18,6 +18,10 @@ const routes: Routes = [
     component:GridComponent
   },
   {
+    path:'logout',
+    component : MainViewComponent
+  },
+  {
     path:'user/:user_id',
     component: UserComponent
   }, {

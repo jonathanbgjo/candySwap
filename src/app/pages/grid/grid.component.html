@@ -45,6 +45,9 @@
 
       </div>
       id:  {{this.user.user_id}}   email: {{this.user.email}}    password: {{this.user.password}} <br>
+
+      <a href ='/logout'>logout</a>
+
       <form (submit)="logout()" #loginForm="ngForm">
           <button type="submit" class="button is-danger">Logout</button>
       </form>
