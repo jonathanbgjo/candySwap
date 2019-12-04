@@ -58,6 +58,7 @@ export class UserComponent implements OnInit {
     }
   }
   logout(){
+    console.log('user component.ts logout')
     this.user_service.logout()
     .toPromise().then(() => this.router.navigate(["/"]))
     .catch(err=> console.log("user logout error", err))
@@ -72,8 +73,5 @@ export class UserComponent implements OnInit {
 
   }
 
-// this.user_service.getUser(id)
-// .then((user) => this.user = user)
-// .catch(err=> console.log("user login error", err))
 
 }

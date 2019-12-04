@@ -718,13 +718,13 @@ export class GridComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.dialog.open(DialoglooseComponent, dialogConfig);
    }
-  //  public slideDown(x:number, y:number){
-  //   var temp:string =  x.toString() + y.toString()
-  //   document.getElementById(temp).animate([
-  //     {transform: 'translateY(-75%)'},
-  //     { transform: 'translateY(0%)'}
-  //   ],{
-  //   duration: 600
-  //   });
-  // }
+   public slideDown(x:number, y:number){
+    var temp:string =  x.toString() + y.toString()
+    document.getElementById(temp).animate([
+      {transform: 'translateY(-75%)'},
+      { transform: 'translateY(0%)'}
+    ],{
+    duration: 600
+    });
+  }
 }

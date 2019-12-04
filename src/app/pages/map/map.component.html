@@ -34,7 +34,7 @@
         </div>
       </div>
       <ul>
-          <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{idx+1}}">{{user.email}}</a> {{idx}}</li>
+          <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}}</li>
       </ul>
       <br>
       User in Session:
