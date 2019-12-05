@@ -63,4 +63,8 @@ export class AppService {
     console.log("delete service")
     return this.http.delete<User>('http://localhost:8000/user/' + user.user_id)
   }
+
+  findTopFive(): Observable<User[]>{
+    return this.http.get<User[]>('http://localhost:8000/topFive')
+  }
 }

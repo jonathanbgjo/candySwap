@@ -26,20 +26,20 @@
         <div class="board-wrapper">
 
         </div>
-        <div class="grid_box board-rows">
-          <div>
-            <div class="grid_row" *ngFor="let candyRow of board.grid">
+        <div class="grid_box board-rows"  [style.width.px]="size"
+            [style.height.px]="size">
+        <div>
+          <div class="grid_row" *ngFor="let candyRow of board.grid">
 
-              <div class="grid_cell" *ngFor="let candy of candyRow">
+            <div class="grid_cell" *ngFor="let candy of candyRow">
 
-                <div class="tiles {{candy.type}}Tiles" id = "{{candy.x}}{{candy.y}}"(swipeleft)="onSwipeLeft($event, candy)"
-                  (swiperight)="onSwipeRight($event, candy)" (swipeup)="onSwipeUp($event, candy)"
-                  (swipedown)="onSwipeDown($event, candy)" [@animateCandy]="candy.type"></div>
-
+              <div class="tiles {{candy.type}}Tiles" id = "{{candy.x}}{{candy.y}}"(swipeleft)="onSwipeLeft($event, candy)"
+                (swiperight)="onSwipeRight($event, candy)" (swipeup)="onSwipeUp($event, candy)"
+                (swipedown)="onSwipeDown($event, candy)" [@animateCandy]="candy.type"></div>
               </div>
             </div>
           </div>
-          <a href = "/grid">Reset</a> <br>
+          <a href = "/grid/map?matrix={{matrix}}" >Reset</a> <br>
 
         </div>
 

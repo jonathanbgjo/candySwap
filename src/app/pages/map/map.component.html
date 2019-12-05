@@ -5,8 +5,6 @@
           <h1 class="app-name has-gradient-text">Candy Crush</h1>
         </div>
       </div>
-      <a href routerLink="/" class="button">Home </a>
-
     </div>
 
     <div class="board">
@@ -16,21 +14,20 @@
       <div class="board-wrapper">
         <div class="grid_box board-rows">
          <div class="level1">
-            <a href="/grid"class="button">Level 1</a>
+            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{matrix: 6}" class="button is-danger">Level1</button>
          </div>
 
          <div class="level2">
-            <a href="/grid"class="button">Level 2</a>
+            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{matrix: 8}" class="button is-danger">Level2</button>
          </div>
          <div class="level3">
-            <a href="/grid"class="button">Level 3</a>
+            <button type="submit" class="button is-danger">Level3</button>
          </div>
          <div class="level4">
-            <a href="/grid" class="button">Level 4</a>
+            <button type="submit" class="button is-danger">Level4</button>
          </div>
          <div class="level5">
-            <a href="/grid" class="button">Level 5</a>
-
+            <button type="submit" class="button is-danger">Level5</button>
          </div>
         </div>
       </div>
@@ -38,11 +35,22 @@
           <li>Email-ID-Score</li>
           <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}} {{user.totalScore}}</li>
       </ul>
-      <br>
+----------------------------- <br>
       User in Session: <br>
       ID: {{this.user.user_id}} <br> USERNAME: {{this.user.username}} <br> EMAIL:{{this.user.email}} <br>PASSWORD:  {{this.user.password}} <br> TOTAL SCORE: {{this.user.totalScore}} <br>
+      -------------------------------<br>
       <a href ='/logout'>logout</a>
       <form (submit)="logout()" #loginForm="ngForm">
         <button type="submit" class="button is-danger">Logout</button>
       </form>
+------------------------------
+
+      <h3> TOP 5 LEADERBOARD</h3>
+      <ul>
+          <li>Email-ID-Score</li>
+          <li *ngFor= 'let user of topFive let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}} {{user.totalScore}}</li>
+      </ul>
+
     </div>
+
+

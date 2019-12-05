@@ -14,4 +14,12 @@ module.exports = (app) => {
     });
   });
 
+  app.get('/topFive' , (req,res) => {
+    console.log('in topFive route')
+    User.findAll({
+      limit: 5,
+      order: [['totalScore', 'DESC'],]
+  }).then(users => res.json(users))
+  .catch(err => {res.status(500);console.log(err)})
+  })
 }

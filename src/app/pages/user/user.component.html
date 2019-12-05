@@ -17,6 +17,7 @@
       <p>username: {{this.userProfile.username}}</p>
       <p>email: {{this.userProfile.email}}</p>
       <p>password: {{this.userProfile.password}}</p>
+      <p>total score: {{this.userProfile.totalScore}}</p>
 
     <div *ngIf ="show" class="board-wrapper">
       <form  (submit)="update()" #loginForm="ngForm">

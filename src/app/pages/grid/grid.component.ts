@@ -84,11 +84,14 @@ export class GridComponent implements OnInit {
   scoreToBeat: number = 15
   user: User;
   users: User[];
-
+  matrix: string;
+  size:number;
+  gameEnd: Boolean = false;
   constructor(
     private titleService: Title,
     private user_service: AppService,
     private router: Router,
+    private route: ActivatedRoute,
     @Inject(MatDialog) public dialog: MatDialog,
   ) {
     this.titleService.setTitle('CandyCrush');
@@ -113,6 +116,19 @@ export class GridComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User();
+
+
+    this.matrix = this.route.snapshot.queryParamMap.get("matrix")
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.matrix = queryParams.get("matrix")
+    })
+    // this.matrix = this.route.snapshot.paramMap.get("matrix")
+    console.log("matrix is" + this.matrix); // popular
+    var y = +this.matrix;
+    this.size=(y*60)+((y*5)-5)
+    this.numOfRows=y;
+    this.numOfColumns=y;
+
 
     for (var row = 0; row < this.numOfRows; row++) {
       this.board.grid[row] = []
@@ -534,17 +550,20 @@ export class GridComponent implements OnInit {
         this.shiftCandy();
       }, 600);
     } else if (this.turns == 0) {
-      if (this.score >= this.scoreToBeat) {
-        console.log('final score' + this.score)
-        this.user.totalScore += this.score;
-        this.user_service.updateUserScore(this.user, this.score)
-        .toPromise().then(() => this.showDialog())
-        .catch((err) => console.log("error in remove candy show dialog", err))
-      } else {
-        console.log('final score' + this.score)
-
-        this.showDialogloose();
+      if(this.gameEnd == false){
+        if (this.score >= this.scoreToBeat) {
+          console.log('final score' + this.score)
+          this.user.totalScore += this.score;
+          this.user_service.updateUserScore(this.user, this.score)
+          .toPromise().then(() => {this.gameEnd = true;this.showDialog()})
+          .catch((err) => console.log("error in remove candy show dialog", err))
+        } else {
+          console.log('final score' + this.score)
+          this.gameEnd = true;
+          this.showDialogloose();
+        }
       }
+
     } else this.checkValidGrid();
   }
   public wait(ms) {
