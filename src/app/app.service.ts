@@ -35,7 +35,7 @@ export class AppService {
     return this.http.post<User>('http://localhost:8000/login', user);
   }
   logged(): Observable<User>{
-    console.log("reached logged inservice");
+    console.log("reached logged in service");
     return this.http.get<User>('http://localhost:8000/logged');
   }
   logout(){
@@ -50,6 +50,13 @@ export class AppService {
     console.log("in update service")
     console.log(user.user_id);
     return this.http.put<User>('http://localhost:8000/user/' + user.user_id, user)
+  }
+  updateUserScore(user: User, score: number): Observable<User> {
+    console.log("in update score service")
+    // console.log(user)
+    // console.log(score);
+    // console.log(user.user_id);
+    return this.http.put<User>('http://localhost:8000/user/score/' + user.user_id, {user, score})
   }
 
   deleteUser(user: User):Observable<User>{

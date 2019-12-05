@@ -15,6 +15,9 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: true,
       defaultValue: " ",
+    },totalScore:{
+      type: type.INTEGER,
+      defaultValue: 0,
     },
     createdAt: type.DATE,
     updatedAt: type.DATE,

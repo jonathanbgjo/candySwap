@@ -6,8 +6,6 @@ module.exports = (app) => {
     //console.log(req);
     User.findAll().then(users => {
       console.log("in find all")
-      console.log(users)
-
       res.json(users);
     })
     .catch(err => {

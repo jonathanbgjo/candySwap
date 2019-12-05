@@ -35,11 +35,12 @@
         </div>
       </div>
       <ul>
-          <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}}</li>
+          <li>Email-ID-Score</li>
+          <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}} {{user.totalScore}}</li>
       </ul>
       <br>
-      User in Session:
-      ID: {{this.user.user_id}} EMAIL:{{this.user.email}} PASSWORD:  {{this.user.password}} <br>
+      User in Session: <br>
+      ID: {{this.user.user_id}} <br> USERNAME: {{this.user.username}} <br> EMAIL:{{this.user.email}} <br>PASSWORD:  {{this.user.password}} <br> TOTAL SCORE: {{this.user.totalScore}} <br>
       <a href ='/logout'>logout</a>
       <form (submit)="logout()" #loginForm="ngForm">
         <button type="submit" class="button is-danger">Logout</button>

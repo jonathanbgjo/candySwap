@@ -25,7 +25,7 @@ const routes: Routes = [
     path:'user/:user_id',
     component: UserComponent
   }, {
-    path:'grid/map',
+    path:'map/grid',
     component:MapComponent
   }
 ];

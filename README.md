@@ -7,7 +7,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Nodemon
-Run 'nodemon server.js' or 'node server.js' in the project folder. It should run on 'http://localhost:8000/'. 
+Run `nodemon server.js` or `node server.js` in the project folder. It should run on 'http://localhost:8000/'. The app will automatically reload if you change any of the server files.
+Should also need `npm install sequelize`
+
 
 ## Code scaffolding
 

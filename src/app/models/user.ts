@@ -4,6 +4,7 @@ export class User{
   email: string;
   password: string;
   confirmPassword: string;
+  totalScore: number;
   createdAt: Date;
   updatedAt: Date;
 }

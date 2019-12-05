@@ -16,6 +16,7 @@ users:User[];
     private router: Router,) { }
 
   ngOnInit() {
+    this.user = new User();
     this.user_service.logged()
     .toPromise().then((user) => {this.user = user; console.log(this.user)})
     .catch(err => {this.router.navigate([""])})
