@@ -14,10 +14,6 @@ const routes: Routes = [
     component : MainViewComponent
   },
   {
-    path:'grid',
-    component:GridComponent
-  },
-  {
     path:'logout',
     component : MainViewComponent
   },
@@ -25,7 +21,7 @@ const routes: Routes = [
     path:'user/:user_id',
     component: UserComponent
   }, {
-    path:'map/grid',
+    path:'map',
     component:MapComponent
   },
 

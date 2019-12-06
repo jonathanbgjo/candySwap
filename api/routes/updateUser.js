@@ -1,4 +1,5 @@
-var User = require('../sequelize');
+var sequelize = require('../sequelize');
+var User = sequelize.User;
 
 module.exports = (app) => {
   console.log("update user route")

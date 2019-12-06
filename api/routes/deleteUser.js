@@ -1,4 +1,5 @@
-var User = require('../sequelize');
+var sequelize = require('../sequelize');
+var User = sequelize.User;
 module.exports = (app) => {
   // app.delete('/api/users:id', (req, res, next) => {
   //   console.log("are we in delete");

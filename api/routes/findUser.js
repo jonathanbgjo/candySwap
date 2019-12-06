@@ -7,8 +7,8 @@
 //   });
 // })
 
-var User = require('../sequelize');
-
+var sequelize = require('../sequelize');
+var User = sequelize.User;
 module.exports = (app) => {
     app.get('/user/:id', (req, res, next) => {
       console.log(req.params);
@@ -43,9 +43,6 @@ module.exports = (app) => {
         });
       }
     });
-    app.get('/api/hi', (req,res) =>{
-      console.log("1");
-    })
 
   // app.get('http://localhost:8000/api/users', (req,res) => {
   //   User.findAll().then(function(users){

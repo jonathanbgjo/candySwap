@@ -1,7 +1,8 @@
 // import User from '../sequelize';
 // import bcrypt from 'bcrypt';
 
-var User = require('../sequelize');
+var sequelize = require('../sequelize');
+var User = sequelize.User;
 var bcrypt = require('bcrypt')
 const BCRYPT_SALT_ROUNDS = 12;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';

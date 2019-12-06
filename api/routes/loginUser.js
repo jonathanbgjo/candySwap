@@ -1,7 +1,8 @@
 // import User from '../sequelize';
 // import bcrypt from 'bcrypt';
 
-var User = require('../sequelize');
+var sequelize = require('../sequelize');
+var User = sequelize.User;
 var bcrypt = require('bcrypt');
 const session = require('express-session');
 

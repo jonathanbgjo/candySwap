@@ -36,6 +36,7 @@ app.use(bodyParser.json())
 //sequelize syntax
 require('./routes/registerUser')(app);
 require('./routes/findUser')(app);
+require('./routes/findLevel')(app);
 require('./routes/findAll')(app);
 require('./routes/loginUser')(app);
 require('./routes/updateUser')(app);

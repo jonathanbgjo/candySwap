@@ -84,9 +84,11 @@ export class GridComponent implements OnInit {
   scoreToBeat: number = 15
   user: User;
   users: User[];
-  matrix: string;
+  matrix: any;
   size:number;
+  level_id: number;
   gameEnd: Boolean = false;
+  savedGrid: string = "";
   constructor(
     private titleService: Title,
     private user_service: AppService,
@@ -116,30 +118,59 @@ export class GridComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User();
+    //this.scoreToBeat *= (+this.route.snapshot.queryParamMap.get("level"))
 
+    //grabbing level id from param and grabbing level information from DB
+    this.user_service.getLevel(+this.route.snapshot.queryParamMap.get('level'))
+    .toPromise().then((level) => {
+      this.level_id = level.level_id
+      this.scoreToBeat = level.scoreToBeat; this.turns = level.turns; this.matrix = level.dimensions;
 
-    this.matrix = this.route.snapshot.queryParamMap.get("matrix")
-    this.route.queryParamMap.subscribe(queryParams => {
-      this.matrix = queryParams.get("matrix")
-    })
-    // this.matrix = this.route.snapshot.paramMap.get("matrix")
-    console.log("matrix is" + this.matrix); // popular
-    var y = +this.matrix;
-    this.size=(y*60)+((y*5)-5)
-    this.numOfRows=y;
-    this.numOfColumns=y;
+      console.log("matrix is" + this.matrix); // popular
+      var y = this.matrix;
+      this.size=(y*60)+((y*5)-5)
+      this.numOfRows=y;
+      this.numOfColumns=y;
 
-
-    for (var row = 0; row < this.numOfRows; row++) {
-      this.board.grid[row] = []
-      for (var column = 0; column < this.numOfColumns; column++) {
-        var candy = new Candy(row, column, this.getRandomCandy())
-        //console.log(candy.type)
-        this.board.grid[row][column] = candy
+      for (var row = 0; row < this.numOfRows; row++) {
+        this.board.grid[row] = []
+        for (var column = 0; column < this.numOfColumns; column++) {
+          var candy = new Candy(row, column, this.getRandomCandy())
+          //console.log(candy.type)
+          this.board.grid[row][column] = candy
+        }
       }
-    }
-    this.checkGrid();
+      console.log(this.scoreToBeat +" " + this.turns + this.matrix)
+      this.checkGrid();
 
+
+    })
+    .catch((err) => {
+      this.level_id = +this.route.snapshot.queryParamMap.get('level')
+      var y = +this.matrix;
+      this.size=(y*60)+((y*5)-5)
+      this.numOfRows=y;
+      this.numOfColumns=y;
+
+      for (var row = 0; row < this.numOfRows; row++) {
+        this.board.grid[row] = []
+        for (var column = 0; column < this.numOfColumns; column++) {
+          var candy = new Candy(row, column, this.getRandomCandy())
+          //console.log(candy.type)
+          this.board.grid[row][column] = candy
+        }
+      }
+      this.checkGrid();
+
+    })
+
+    // this.turns += (+this.route.snapshot.queryParamMap.get('level'));
+    // this.matrix = this.route.snapshot.queryParamMap.get("matrix")
+    //grabbing matrix from level in DB
+    // this.route.queryParamMap.subscribe(queryParams => {
+    //   this.matrix = queryParams.get("matrix")
+    // })
+    // this.matrix = this.route.snapshot.paramMap.get("matrix")
 
 
     this.user_service.logged()
@@ -449,11 +480,13 @@ export class GridComponent implements OnInit {
 
   //returns an array of coordinates to delete
   public checkGrid() {
+    this.savedGrid = '';
     let removeCandyArr = [];
     var vdict = {}; var hcount = 0; var hArr = []; let colorMarker = CandyType.nocolor;
     //iterate through 2d matrix
     for (let i = 0; i < this.numOfRows; i++) {
       for (let k = 0; k < this.numOfColumns; k++) {
+        this.savedGrid += " "+ this.board.grid[i][k].type;
         //console.log(hArr);
 
         //if dict doesnt exist, put in first entry
@@ -699,7 +732,8 @@ export class GridComponent implements OnInit {
         }
       }
     }
-    alert("no more moves available")
+    console.log("no more moves available")
+    // alert("no more moves available")
     this.colorScramble();
   }
 

@@ -38,7 +38,7 @@ export class MainViewComponent implements OnInit {
 
   login(){
   	this.user_service.login(this.user)
-  		.toPromise().then((user) => this.router.navigate(["/map/grid"]))
+  		.toPromise().then((user) => this.router.navigate(["/map"]))
       .catch(err=> console.log("user login error", err))
       console.log("LOGIN COMPONENT")
       console.log(this.user)

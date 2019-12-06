@@ -4,6 +4,7 @@ import { Inject } from '@angular/core';
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { User } from './models/user';
+import {Level} from './models/level';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import 'rxjs';
@@ -45,6 +46,12 @@ export class AppService {
   getUser(user_id: number): Observable<User>{
     console.log("in get one user service");
     return this.http.get<User>('http://localhost:8000/user/' + user_id)
+  }
+  getLevel(level_id: number): Observable<Level>{
+    console.log('in get level service')
+    console.log(level_id)
+    return this.http.get<Level>('http://localhost:8000/level/' + level_id)
+
   }
   updateUser(user: User): Observable<User> {
     console.log("in update service")

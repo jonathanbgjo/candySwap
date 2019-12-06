@@ -16,7 +16,7 @@
           </div>
           <!--  <p class="board-name"><a href routerLink="register">Register</a></p>-->
         </div>
-        <div class="level"> <a href routerLink="/map/grid">Levels</a></div>
+        <div class="level"> <a href routerLink="/map">Levels</a></div>
       </div>
     </div>
 
@@ -39,12 +39,21 @@
               </div>
             </div>
           </div>
-          <a href = "/grid/map?matrix={{matrix}}" >Reset</a> <br>
+          <a href = "/grid/map?level={{level_id}}" >Reset</a> <br>
 
         </div>
 
       </div>
-      id:  {{this.user.user_id}}   email: {{this.user.email}}    password: {{this.user.password}}  totalScore: {{this.user.totalScore}}<br>
+      id:  {{this.user.user_id}} <br>  email: {{this.user.email}}  <br>  password: {{this.user.password}}  <br>totalScore: {{this.user.totalScore}}<br>
+<br><br><br>
+        Send to DB for saved games <br>
+      level_id: {{this.level_id}} <br>
+      user_id: {{this.user.user_id}} <br>
+      dimension: {{this.matrix}}  <br>
+      turnsLeft: {{this.turns}} <br>
+      currentScore: {{this.score}} <br>
+      scoreToBeat: {{this.scoreToBeat}} <br>
+      savedGrid: {{savedGrid}}
 
       <a href ='/logout'>logout</a>
 

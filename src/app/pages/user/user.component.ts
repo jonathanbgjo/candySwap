@@ -53,7 +53,7 @@ export class UserComponent implements OnInit {
 
       this.user.user_id = this.userProfile.user_id;
       this.user_service.updateUser(this.user)
-      .toPromise().then((user) => {this.router.navigate(["/map/grid"])})
+      .toPromise().then((user) => {this.router.navigate(["/map"])})
   		.catch(err=> {console.log("user update error", err)})
     }
   }
