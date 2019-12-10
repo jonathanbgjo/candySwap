@@ -38,7 +38,6 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/']);
 
     }
-    console.log("WE ARE IN REGISTER COMPONENT TS " + this.new_user.email + this.new_user.password + this.new_user.confirmPassword)
     this.user_service.register(this.new_user)
       .toPromise().then(() => {this.router.navigate(["/"])})
   		.catch(err=> {console.log("user register error", err)})

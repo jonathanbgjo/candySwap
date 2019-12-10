@@ -46,7 +46,7 @@
       </div>
       id:  {{this.user.user_id}} <br>  email: {{this.user.email}}  <br>  password: {{this.user.password}}  <br>totalScore: {{this.user.totalScore}}<br>
 <br><br><br>
-        Send to DB for saved games <br>
+      Send to DB for saved games <br>
       level_id: {{this.level_id}} <br>
       user_id: {{this.user.user_id}} <br>
       dimension: {{this.matrix}}  <br>
@@ -54,7 +54,10 @@
       currentScore: {{this.score}} <br>
       scoreToBeat: {{this.scoreToBeat}} <br>
       savedGrid: {{savedGrid}}
-
+      <form (submit)="save()" #loginForm="ngForm">
+          <button type="submit" class="button is-danger">Save Game</button>
+      </form>
+      <br><br><br><br>
       <a href ='/logout'>logout</a>
 
       <form (submit)="logout()" #loginForm="ngForm">
@@ -62,6 +65,13 @@
       </form>
 
     </div>
+    <br><br><br><br>
+    <ul>
+        Top Leaderboard for Level {{this.level_id}} <li>Email-ID-Score</li>
+        <!-- {{this.levelLeaderboard}} -->
+        <!-- whats in levelLeaderboard is an array of arrays. [ [email,score], [email2, score2]] -->
+        <li *ngFor= 'let user of levelLeaderboard let idx= index'>  <a href= '/user/{{user.user_id}}'>{{user.user_id}}</a>     {{user.score}}</li>
+    </ul>
 </div>
 
 

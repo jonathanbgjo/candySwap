@@ -8,8 +8,8 @@ const session = require('express-session');
 
 module.exports = (app) => {
   app.post('/login', (req,res)=>{
-    console.log(req)
-    console.log("IN LOGIN ROUTE")
+    // console.log(req)
+    // console.log("IN LOGIN ROUTE")
     if (req.body.email) {
       User.findOne({
         where: {
@@ -19,17 +19,17 @@ module.exports = (app) => {
       })
         .then(user => {
           if (user != null) {
-            console.log('user found in db');
-            console.log(req.body.password ===user.password);
+            // console.log('user found in db');
+            // console.log(req.body.password ===user.password);
               if(req.body.password === user.password){
                 //req.session.user = user;
-                console.log("HEY WE SAVED IN SESSION");
+                // console.log("HEY WE SAVED IN SESSION");
                 session.user = user;
                 //   session.save()
                 //     console.log('saved?!')
                 //  }
-                console.log(session.user);
-                console.log("at the end of login")
+                // console.log(session.user);
+                // console.log("at the end of login")
                 res.status(200).json(session.user);
             }else {
               console.log('user not found in db');
@@ -56,10 +56,10 @@ module.exports = (app) => {
   })
 
   app.get('/logged', (req,res) =>{
-    console.log("in logged route")
+    // console.log("in logged route")
 
     if(session.user){
-      console.log(session.user);
+      // console.log(session.user);
       res.status(200).json(session.user)
     }else{
       console.log("request.session user doesnt exist")
@@ -69,10 +69,10 @@ module.exports = (app) => {
 
   app.get('/logout', (req,res) => {
     //console.log(req)
-    console.log("in logout route/server.js")
+    // console.log("in logout route/server.js")
 
-    console.log(session = null)
-    res.json(true);
+    session.user = null;
+    res.status(200).json(true);
   })
 }
 

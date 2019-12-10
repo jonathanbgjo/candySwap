@@ -11,7 +11,7 @@ var sequelize = require('../sequelize');
 var User = sequelize.User;
 module.exports = (app) => {
     app.get('/user/:id', (req, res, next) => {
-      console.log(req.params);
+      // console.log(req.params);
       if (req.params.id) {
         User.findOne({
           where: {
@@ -20,7 +20,7 @@ module.exports = (app) => {
           // order: [ [ 'createdAt', 'DESC' ]],
       })
           .then(user => {
-            console.log(user);
+            // console.log(user);
             if (user != null) {
               console.log('user found in db');
               res.status(200).json(user);
@@ -32,7 +32,7 @@ module.exports = (app) => {
             }
           })
           .catch(err => {
-            console.log(User);
+            // console.log(User);
             console.log('problem communicating with db');
             res.status(500).json(err);
           });

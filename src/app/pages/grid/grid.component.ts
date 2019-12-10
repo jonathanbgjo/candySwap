@@ -27,12 +27,12 @@ import { timeout } from 'q';
       state('blue', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('bluecandy.jpg')"
+        'background-image': "url('blue.jpg')"
       })),
       state('red', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('redcandy.jpg')"
+        'background-image': "url('redcolour.jpg')"
       })),
       state('green', style({
         opacity: 1,
@@ -42,7 +42,7 @@ import { timeout } from 'q';
       state('yellow', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('browncandy.png')"
+        'background-image': "url('yellowcolor.jpg')"
       })),
       state('violet', style({
         opacity: 1,
@@ -52,7 +52,7 @@ import { timeout } from 'q';
       state('orange', style({
         opacity: 1,
         transform: 'translateY(0%)',
-        'background-image': "url('candy2.png')"
+        'background-image': "url('orangecolor.jpg')"
       })),
       transition('* => nocolor', [
         animate('0.5s', keyframes([
@@ -76,19 +76,13 @@ import { timeout } from 'q';
 })
 export class GridComponent implements OnInit {
 
-  board: Board = new Board([])
-  numOfRows: number = 6
-  numOfColumns: number = 6
-  score: number = 0
-  turns: number = 5
-  scoreToBeat: number = 15
-  user: User;
-  users: User[];
-  matrix: any;
-  size:number;
-  level_id: number;
+  board: Board = new Board([]); numOfRows: number = 6; numOfColumns: number = 6;
+  score: number = 0; turns: number = 5; scoreToBeat: number = 15;
+  user: User; users: User[];
+  matrix: any; size:number; level_id: number;
   gameEnd: Boolean = false;
-  savedGrid: string = "";
+  savedGrid: string = ""; gridString: string; gridArray: any;
+  count: number = 0; levelLeaderboard: any;
   constructor(
     private titleService: Title,
     private user_service: AppService,
@@ -115,9 +109,26 @@ export class GridComponent implements OnInit {
       return CandyType.orange
     }
   }
+  setRandomCandy(color): CandyType{
+    if (color == 'blue') {
+      return CandyType.Blue
+    } else if (color == 'green') {
+      return CandyType.Green
+    } else if (color == 'red') {
+      return CandyType.Red
+    }else if(color =='yellow'){
+      return CandyType.yellow
+    }else if(color =='violet'){
+      return CandyType.violet
+    }else if(color =='orange'){
+      return CandyType.orange
+    }
+  }
 
   ngOnInit() {
     this.user = new User();
+    this.count =0 ;
+    this.levelLeaderboard = new Array;
     //this.scoreToBeat *= (+this.route.snapshot.queryParamMap.get("level"))
 
     //grabbing level id from param and grabbing level information from DB
@@ -125,32 +136,29 @@ export class GridComponent implements OnInit {
     .toPromise().then((level) => {
       this.level_id = level.level_id
       this.scoreToBeat = level.scoreToBeat; this.turns = level.turns; this.matrix = level.dimensions;
-
-      console.log("matrix is" + this.matrix); // popular
+      this.gridString = level.grid; this.gridArray = this.gridString.split(" ");
+      // console.log("matrix is" + this.matrix); // popular
       var y = this.matrix;
-      this.size=(y*60)+((y*5)-5)
-      this.numOfRows=y;
-      this.numOfColumns=y;
+      this.size=(y*60)+((y*5)-5); this.numOfRows=y; this.numOfColumns=y;
 
       for (var row = 0; row < this.numOfRows; row++) {
         this.board.grid[row] = []
         for (var column = 0; column < this.numOfColumns; column++) {
-          var candy = new Candy(row, column, this.getRandomCandy())
+          var candy = new Candy(row, column, this.setRandomCandy(this.gridArray[this.count]))
           //console.log(candy.type)
           this.board.grid[row][column] = candy
+          this.count++;
+
         }
       }
-      console.log(this.scoreToBeat +" " + this.turns + this.matrix)
+      // console.log(this.scoreToBeat +" " + this.turns + this.matrix)
       this.checkGrid();
 
 
     })
     .catch((err) => {
       this.level_id = +this.route.snapshot.queryParamMap.get('level')
-      var y = +this.matrix;
-      this.size=(y*60)+((y*5)-5)
-      this.numOfRows=y;
-      this.numOfColumns=y;
+      var y = +this.matrix; this.size=(y*60)+((y*5)-5); this.numOfRows=y; this.numOfColumns=y;
 
       for (var row = 0; row < this.numOfRows; row++) {
         this.board.grid[row] = []
@@ -163,6 +171,10 @@ export class GridComponent implements OnInit {
       this.checkGrid();
 
     })
+
+    this.user_service.getLevelLeaderboard( +this.route.snapshot.queryParamMap.get('level'))
+    .toPromise().then( (leaderboard) => {this.levelLeaderboard = leaderboard;console.log('getlevelleaderboard in grid compoennt');console.log(this.levelLeaderboard)})
+    .catch((err) => {console.log('error in getlevel leaderboard componentts', err)})
 
     // this.turns += (+this.route.snapshot.queryParamMap.get('level'));
     // this.matrix = this.route.snapshot.queryParamMap.get("matrix")
@@ -174,7 +186,7 @@ export class GridComponent implements OnInit {
 
 
     this.user_service.logged()
-    .toPromise().then((user) => {this.user = user; console.log("GRID COMPONENT TS USER IN SESSION?");console.log(this.user)})
+    .toPromise().then((user) => {this.user = user;})
     .catch(err => {this.router.navigate([""])})
 
     // this.user_service.getAllUsers()
@@ -588,7 +600,14 @@ export class GridComponent implements OnInit {
           console.log('final score' + this.score)
           this.user.totalScore += this.score;
           this.user_service.updateUserScore(this.user, this.score)
-          .toPromise().then(() => {this.gameEnd = true;this.showDialog()})
+          .toPromise().then(() => {
+            console.log('got back from update user score')
+            this.user_service.updateLeaderboard(this.level_id, this.user, this.score)
+            .toPromise().then((content) => console.log(content))
+            .catch( (err) => console.log('err in grid component afte update leaderboard', err))
+            this.gameEnd = true;
+            this.showDialog()
+          })
           .catch((err) => console.log("error in remove candy show dialog", err))
         } else {
           console.log('final score' + this.score)

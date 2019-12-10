@@ -15,7 +15,7 @@ module.exports = (app) => {
   // });
 
   app.delete('/user/:id', (req, res) => {
-    console.log("in delete route/server.js")
+    // console.log("in delete route/server.js")
     const id = req.params.id;
     User.destroy({
       where: { user_id: id }

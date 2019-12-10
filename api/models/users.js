@@ -1,5 +1,8 @@
+var sequelize = require('../sequelize');
+var Level = sequelize.Level;
+var LevelLeaderboard = sequelize.LevelLeaderboard
 module.exports = (sequelize, type) => {
-  return sequelize.define('user', {
+  var User = sequelize.define('user', {
     user_id: {
       type: type.INTEGER,
       primaryKey: true,
@@ -20,7 +23,10 @@ module.exports = (sequelize, type) => {
       defaultValue: 0,
     },
     createdAt: type.DATE,
-    updatedAt: type.DATE,
-  })
-};
+    updatedAt: type.DATE},
+    { sequelize, modelName: LevelLeaderboard}
 
+  )
+
+  return User;
+}

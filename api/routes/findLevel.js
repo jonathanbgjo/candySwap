@@ -2,8 +2,8 @@ var sequelize = require('../sequelize');
 var Level = sequelize.Level;
 module.exports = (app) => {
     app.get('/level/:id', (req,res) =>{
-      console.log('in get one level route')
-      console.log(req.params.id)
+      // console.log('in get one level route')
+      // console.log(req.params.id)
       if(req.params.id){
         Level.findOne({
           where:{
@@ -11,8 +11,8 @@ module.exports = (app) => {
           }
         }).then(level => {
           if(level != null){
-            console.log('found level in DB')
-            console.log(level);
+            // console.log('found level in DB')
+            // console.log(level);
             res.status(200).json(level);
           }
           else{

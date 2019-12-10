@@ -28,7 +28,7 @@ topFive: any;
     // .catch(err => {this.router.navigate([""])})
 
     this.user_service.findTopFive()
-    .toPromise().then( (users) => {console.log("TOPFIVE!!!!" +this.topFive), this.topFive = users})
+    .toPromise().then( (users) => {this.topFive = users})
     .catch((err) => console.log('findtop5 error', err))
   }
   logout(){
