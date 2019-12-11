@@ -53,7 +53,7 @@
       turnsLeft: {{this.turns}} <br>
       currentScore: {{this.score}} <br>
       scoreToBeat: {{this.scoreToBeat}} <br>
-      savedGrid: {{savedGrid}}
+      savedGrid: {{this.savedGrid}}
       <form (submit)="save()" #loginForm="ngForm">
           <button type="submit" class="button is-danger">Save Game</button>
       </form>
@@ -67,10 +67,10 @@
     </div>
     <br><br><br><br>
     <ul>
-        Top Leaderboard for Level {{this.level_id}} <li>Email-ID-Score</li>
+        Top 3 Leaderboard for Level {{this.level_id}} <li>ID-Score</li>
         <!-- {{this.levelLeaderboard}} -->
         <!-- whats in levelLeaderboard is an array of arrays. [ [email,score], [email2, score2]] -->
-        <li *ngFor= 'let user of levelLeaderboard let idx= index'>  <a href= '/user/{{user.user_id}}'>{{user.user_id}}</a>     {{user.score}}</li>
+        <li *ngFor= 'let user of levelLeaderboard let idx= index'>  <a href= '/user/{{user.user_id}}'>{{user.user_id}}</a>  	&nbsp;   {{user.score}}</li>
     </ul>
 </div>
 

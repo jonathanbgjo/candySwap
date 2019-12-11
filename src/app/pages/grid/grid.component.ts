@@ -171,7 +171,7 @@ export class GridComponent implements OnInit {
       this.checkGrid();
 
     })
-
+    //get levelleaderboard from database
     this.user_service.getLevelLeaderboard( +this.route.snapshot.queryParamMap.get('level'))
     .toPromise().then( (leaderboard) => {this.levelLeaderboard = leaderboard;console.log('getlevelleaderboard in grid compoennt');console.log(this.levelLeaderboard)})
     .catch((err) => {console.log('error in getlevel leaderboard componentts', err)})
@@ -184,7 +184,7 @@ export class GridComponent implements OnInit {
     // })
     // this.matrix = this.route.snapshot.paramMap.get("matrix")
 
-
+    //check if user is logged in.
     this.user_service.logged()
     .toPromise().then((user) => {this.user = user;})
     .catch(err => {this.router.navigate([""])})
@@ -192,14 +192,17 @@ export class GridComponent implements OnInit {
     // this.user_service.getAllUsers()
     // .subscribe(users => {this.users = users;})
   }
-
+  //log the user out.
   logout(){
     this.user_service.logout()
     .toPromise().then(() => this.router.navigate(["/"]))
     .catch(err=> console.log("user logout error", err))
 
   }
+  save(){
+    this.user_service.saveLevel(this.level_id,this.user, this.matrix, this.turns, this.score, this.scoreToBeat, this.savedGrid)
 
+  }
   onSwipeLeft(event, candy: Candy) {
     if (candy.y == 0 || this.turns == 0) {
       return
@@ -323,10 +326,6 @@ export class GridComponent implements OnInit {
       }, 600);
     }
   }
-
-
-
-
 
   public localCheck(direction: number, x: number, y: number, sum: number, type: CandyType) {
     var up = 0;

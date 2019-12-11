@@ -42,7 +42,7 @@ require('./routes/loginUser')(app);
 require('./routes/updateUser')(app);
 require('./routes/deleteUser')(app);
 require('./routes/updateLeaderboard')(app);
-
+require('./routes/saveLevel')(app);
 
 app.listen(8000, () => {
   console.log('Server started!')

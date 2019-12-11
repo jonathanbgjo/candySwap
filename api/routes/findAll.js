@@ -42,6 +42,7 @@ module.exports = (app) => {
     LevelLeaderboard.findAll({
       where: {'level_id' : req.params.id},
       order: [['score', 'DESC']],
+      limit: 3,
     })
     .then(content => res.json(content))
     .catch(err => console.log(err));

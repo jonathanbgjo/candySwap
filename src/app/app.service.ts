@@ -84,4 +84,9 @@ export class AppService {
     console.log('in get leaderboard service')
     return this.http.get('http://localhost:8000/api/levelLeaderboard/' + level_id);
   }
+  saveLevel(level_id: number ,user: User, matrix: number, turns: number, score: number, scoreToBeat: number, savedGrid:String){
+    console.log('in saveLevel service')
+    return this.http.post('http://localhost:8000/saveLevel/' + level_id, {user,score});
+
+  }
 }
