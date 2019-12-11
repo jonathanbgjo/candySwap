@@ -80,9 +80,10 @@ export class GridComponent implements OnInit {
   score: number = 0; turns: number = 5; scoreToBeat: number = 15;
   user: User; users: User[];
   matrix: any; size:number; level_id: number;
-  gameEnd: Boolean = false;
+  gameEnd: Boolean = false;   found: Boolean = false;
   savedGrid: string = ""; gridString: string; gridArray: any;
   count: number = 0; levelLeaderboard: any;
+
   constructor(
     private titleService: Title,
     private user_service: AppService,
@@ -131,9 +132,63 @@ export class GridComponent implements OnInit {
     this.levelLeaderboard = new Array;
     //this.scoreToBeat *= (+this.route.snapshot.queryParamMap.get("level"))
 
+    //check if user is logged in. and then find saved game if there is one for the level/user
+    this.user_service.logged()
+    .toPromise().then((user) => {
+      this.user = user;
+      this.user_service.getSavedLevel(+this.route.snapshot.queryParamMap.get('level'), this.user)
+      .toPromise().then((savedLevel) => {
+        this.found = true;
+        if(savedLevel['grid'] == ''){
+          this.found = false;
+        }
+        if(savedLevel['turns'] == 0){
+          this.found = false;
+        }
+        //i think object of {level, user} is being returned. So find first index for level and grab information that way.
+        console.log("123012312312830-12930-12930-12931-203")
+        console.log(savedLevel)
+        this.level_id = savedLevel['level_id']; this.score = savedLevel['score'];
+        this.scoreToBeat = savedLevel['scoreToBeat']; this.turns = savedLevel['turns']; this.matrix = savedLevel['dimensions'];
+        this.gridString = savedLevel['grid']; this.gridArray = this.gridString.split(" ");
+        console.log('grid' + "     " + this.gridString)
+        console.log(this.matrix)
+        this.count = 0;
+        // console.log("matrix is" + this.matrix); // popular
+        var y = +this.matrix;
+        this.size=(y*60)+((y*5)-5); this.numOfRows=y; this.numOfColumns=y;
+        if(this.found==true){
+          for (var row = 0; row < this.numOfRows; row++) {
+            this.board.grid[row] = []
+            for (var column = 0; column < this.numOfColumns; column++) {
+              var candy = new Candy(row, column, this.setRandomCandy(this.gridArray[this.count]))
+              this.board.grid[row][column] = candy
+              this.count++;
+            }
+          }
+
+        }
+        // c  onsole.log(this.scoreToBeat +" " + this.turns + this.matrix)
+        this.checkGrid();
+      })
+      .catch((err) => {
+        this.found = false;
+        console.log('error in find saved game component', err)
+      })})
+    .catch(err => {this.router.navigate([""])})
+
+
     //grabbing level id from param and grabbing level information from DB
-    this.user_service.getLevel(+this.route.snapshot.queryParamMap.get('level'))
+    //finding game in progress if it exists, if not just grab regular default grid
+
+
+
+    //if you cant find saved game for that user and that specific level, just load default grid for that level
+    if(this.found == false){
+      //
+      this.user_service.getLevel(+this.route.snapshot.queryParamMap.get('level'))
     .toPromise().then((level) => {
+      //i think object of {level, user} is being returned. So find first index for level and grab information that way.
       this.level_id = level.level_id
       this.scoreToBeat = level.scoreToBeat; this.turns = level.turns; this.matrix = level.dimensions;
       this.gridString = level.grid; this.gridArray = this.gridString.split(" ");
@@ -171,6 +226,7 @@ export class GridComponent implements OnInit {
       this.checkGrid();
 
     })
+    }
     //get levelleaderboard from database
     this.user_service.getLevelLeaderboard( +this.route.snapshot.queryParamMap.get('level'))
     .toPromise().then( (leaderboard) => {this.levelLeaderboard = leaderboard;console.log('getlevelleaderboard in grid compoennt');console.log(this.levelLeaderboard)})
@@ -184,13 +240,6 @@ export class GridComponent implements OnInit {
     // })
     // this.matrix = this.route.snapshot.paramMap.get("matrix")
 
-    //check if user is logged in.
-    this.user_service.logged()
-    .toPromise().then((user) => {this.user = user;})
-    .catch(err => {this.router.navigate([""])})
-
-    // this.user_service.getAllUsers()
-    // .subscribe(users => {this.users = users;})
   }
   //log the user out.
   logout(){
@@ -200,8 +249,11 @@ export class GridComponent implements OnInit {
 
   }
   save(){
+    console.log(this.matrix)
+    console.log('tHIS IS MATRIX DIMENSION')
     this.user_service.saveLevel(this.level_id,this.user, this.matrix, this.turns, this.score, this.scoreToBeat, this.savedGrid)
-
+    .toPromise().then(result => console.log("userservice result" + result))
+    .catch( err => console.log('error in savelevel service', err))
   }
   onSwipeLeft(event, candy: Candy) {
     if (candy.y == 0 || this.turns == 0) {
@@ -497,7 +549,12 @@ export class GridComponent implements OnInit {
     //iterate through 2d matrix
     for (let i = 0; i < this.numOfRows; i++) {
       for (let k = 0; k < this.numOfColumns; k++) {
-        this.savedGrid += " "+ this.board.grid[i][k].type;
+        if(this.savedGrid == ""){
+          this.savedGrid += this.board.grid[i][k].type
+        }
+        else{
+          this.savedGrid += " "+ this.board.grid[i][k].type;
+        }
         //console.log(hArr);
 
         //if dict doesnt exist, put in first entry
@@ -604,6 +661,9 @@ export class GridComponent implements OnInit {
             this.user_service.updateLeaderboard(this.level_id, this.user, this.score)
             .toPromise().then((content) => console.log(content))
             .catch( (err) => console.log('err in grid component afte update leaderboard', err))
+            this.user_service.deleteSavedLevel(this.level_id, this.user)
+            .toPromise().then(result => console.log(result))
+            .catch(err => console.log(err))
             this.gameEnd = true;
             this.showDialog()
           })

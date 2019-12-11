@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
+import { SavedLevel} from './models/savedLevel'
 
 @Injectable({
   providedIn: 'root',
@@ -47,8 +47,15 @@ export class AppService {
     // console.log("in get one user service");
     return this.http.get<User>('http://localhost:8000/user/' + user_id)
   }
+  getSavedLevel(level_id: number, user: User){
+    console.log('in get level service')
+    // console.log(level_id)
+
+    return this.http.get('http://localhost:8000/level/' + level_id + "/" +user.user_id)
+
+  }
   getLevel(level_id: number): Observable<Level>{
-    // console.log('in get level service')
+    console.log('in get level service')
     // console.log(level_id)
     return this.http.get<Level>('http://localhost:8000/level/' + level_id)
 
@@ -84,9 +91,16 @@ export class AppService {
     console.log('in get leaderboard service')
     return this.http.get('http://localhost:8000/api/levelLeaderboard/' + level_id);
   }
-  saveLevel(level_id: number ,user: User, matrix: number, turns: number, score: number, scoreToBeat: number, savedGrid:String){
+  saveLevel(level_id: number ,user: User, dimensions: number, turns: number, score: number, scoreToBeat: number, savedGrid:String){
     console.log('in saveLevel service')
-    return this.http.post('http://localhost:8000/saveLevel/' + level_id, {user,score});
-
+    console.log(dimensions)
+    return this.http.post('http://localhost:8000/saveLevel/' + level_id, {user,score,dimensions,turns, scoreToBeat, savedGrid});
+    //wrap what you want to send in body in the {} after url
   }
+  deleteSavedLevel(level_id: number, user: User):Observable<User>{
+    // console.log("delete service")
+    return this.http.delete<User>('http://localhost:8000/level/' + level_id +"/" + user.user_id)
+  }
+
+
 }

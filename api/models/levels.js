@@ -1,6 +1,7 @@
 var sequelize = require('../sequelize');
 var User = sequelize.User;
 var LevelLeaderboard = sequelize.LevelLeaderboard
+var SavedLevel = sequelize.SavedLevel
 
 module.exports = (sequelize, type) => {
     var Level = sequelize.define('level', {
@@ -19,7 +20,9 @@ module.exports = (sequelize, type) => {
       dimensions: {type: type.INTEGER, default: 6},
       createdAt: type.DATE,
       updatedAt: type.DATE},
-      { sequelize, modelName: LevelLeaderboard}
+      { sequelize, modelName: LevelLeaderboard},
+      { sequelize, modelName: SavedLevel}
+
     )
 
   return Level;
