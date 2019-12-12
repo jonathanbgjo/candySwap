@@ -43,9 +43,8 @@ require('./routes/updateLeaderboard')(app);
 require('./routes/saveLevel')(app);
 require('./routes/deleteSavedLevel')(app);
 require('./routes/createLevel')(app);
-app.listen(8000, () => {
-  console.log('Server started!')
+
+app.listen(process.env.PORT || 8000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
-
-
 module.exports = app;
