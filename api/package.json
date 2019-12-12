@@ -1,6 +1,7 @@
-{"engines": {
-  "node": "12.13.0",
-  "npm": "6.13.4"
+{
+  "engines": {
+    "node": "12.13.0",
+    "npm": "6.13.4"
   },
   "name": "candycrush",
   "version": "0.0.0",
@@ -11,10 +12,14 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "preinstall": "npm install -g angular-cli",
+    "postinstall": "ng build && mv dist/* .",
     "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~8.3.18",
+    "@angular/compiler-cli": "~8.2.9",
     "@angular/animations": "~8.2.9",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "~8.2.9",
@@ -24,8 +29,7 @@
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
-    "@angular/cli": "~8.3.18",
-    "@angular/compiler-cli": "~8.2.9",
+
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
