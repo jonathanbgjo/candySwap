@@ -39,7 +39,9 @@
               </div>
             </div>
           </div>
-          <a href = "/grid/map?level={{level_id}}" >Reset</a> <br>
+          <a href = "/grid/map?level={{level_id}}" >Reset</a>  <form (submit)="save()" #loginForm="ngForm">
+              <button type="submit" class="button is-danger">Save Game</button>
+          </form><br>
 
         </div>
 
@@ -54,9 +56,7 @@
       currentScore: {{this.score}} <br>
       scoreToBeat: {{this.scoreToBeat}} <br>
       savedGrid: {{this.savedGrid}}
-      <form (submit)="save()" #loginForm="ngForm">
-          <button type="submit" class="button is-danger">Save Game</button>
-      </form>
+
       <br><br><br><br>
       <a href ='/logout'>logout</a>
 

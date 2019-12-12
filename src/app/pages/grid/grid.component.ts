@@ -699,6 +699,10 @@ export class GridComponent implements OnInit {
           })
           .catch((err) => console.log("error in remove candy show dialog", err))
         } else {
+            //make sure to delete the user progress, so they dont keep playing from the same saved point after they lose
+            this.user_service.deleteSavedLevel(this.level_id, this.user)
+            .toPromise().then(result => console.log(result))
+            .catch(err => console.log(err))
           console.log('final score' + this.score)
           this.gameEnd = true;
           //display you lose box
