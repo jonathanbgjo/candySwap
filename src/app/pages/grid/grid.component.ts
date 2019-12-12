@@ -480,38 +480,41 @@ export class GridComponent implements OnInit {
 
     //_____deleting candies____________________________________________________
     if ((up + down) >= 2) {
+
       for (var i = 0; i <= up; i++) {
-        this.board.grid[x][y + i].type = CandyType.nocolor;
-        if (this.board.grid[x][y + i].type != CandyType.nocolor) {
-          this.score++;
+        if(this.board.grid[x][y + i].type != CandyType.nocolor){
+          this.score ++;
         }
+        this.board.grid[x][y + i].type = CandyType.nocolor;
       }
       for (var i = 0; i <= down; i++) {
-        if (this.board.grid[x][y - i].type != CandyType.nocolor) {
-          this.score++;
+        if(this.board.grid[x][y - i].type != CandyType.nocolor){
+          this.score ++;
         }
         this.board.grid[x][y - i].type = CandyType.nocolor;
-
       }
       success = true;
     }
     if ((left + right) >= 2) {
       for (var i = 0; i <= left; i++) {
-        if (this.board.grid[x - i][y].type != CandyType.nocolor) {
-          this.score++;
-        }
+      if(this.board.grid[x - i][y].type != CandyType.nocolor){
+        this.score ++;
+      }
         this.board.grid[x - i][y].type = CandyType.nocolor;
       }
       for (var i = 0; i <= right; i++) {
-        if (this.board.grid[x + i][y].type != CandyType.nocolor) {
-          this.score++;
+        if(this.board.grid[x + i][y].type != CandyType.nocolor){
+          this.score ++;
         }
         this.board.grid[x + i][y].type = CandyType.nocolor;
         success = true;
       }
     }
     this.wait(10)
-    console.log(this.score)
+
+    //console.log(this.score)
+
+
     if (success == true) {
       return 1;
     }
