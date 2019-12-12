@@ -48,5 +48,16 @@ module.exports = (app) => {
     .catch(err => console.log(err));
   })
 
+  app.get('/levels', (req,res) =>{
+    Level.findAll().then(levels => {
+      // console.log("in find all")
+      res.json(levels);
+    })
+    .catch(err => {
+      console.log('problem with get alllevels');
+      res.status(500).json(err);
+    });
+  })
+
 
 }

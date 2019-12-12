@@ -75,7 +75,7 @@ import { timeout } from 'q';
   ]
 })
 export class GridComponent implements OnInit {
-
+//initilize all variables
   board: Board = new Board([]); numOfRows: number = 6; numOfColumns: number = 6;
   score: number = 0; turns: number = 5; scoreToBeat: number = 15;
   user: User; users: User[];
@@ -108,6 +108,14 @@ export class GridComponent implements OnInit {
       return CandyType.violet
     }else if(value ==5){
       return CandyType.orange
+    }else if(value ==6){
+      return CandyType.black
+    }
+    else if(value ==7){
+      return CandyType.brown
+    }
+    else if(value ==8){
+      return CandyType.white
     }
   }
   setRandomCandy(color): CandyType{
@@ -123,6 +131,14 @@ export class GridComponent implements OnInit {
       return CandyType.violet
     }else if(color =='orange'){
       return CandyType.orange
+    }else if(color =='white'){
+      return CandyType.white
+    }
+    else if(color =='brown'){
+      return CandyType.brown
+    }
+    else if(color =='black'){
+      return CandyType.black
     }
   }
 
@@ -132,10 +148,11 @@ export class GridComponent implements OnInit {
     this.levelLeaderboard = new Array;
     //this.scoreToBeat *= (+this.route.snapshot.queryParamMap.get("level"))
 
-    //check if user is logged in. and then find saved game if there is one for the level/user
+    //check if user is logged in.
     this.user_service.logged()
     .toPromise().then((user) => {
       this.user = user;
+      //and then find saved game if there is one for the level/user
       this.user_service.getSavedLevel(+this.route.snapshot.queryParamMap.get('level'), this.user)
       .toPromise().then((savedLevel) => {
         this.found = true;
@@ -148,6 +165,7 @@ export class GridComponent implements OnInit {
         //i think object of {level, user} is being returned. So find first index for level and grab information that way.
         console.log("123012312312830-12930-12930-12931-203")
         console.log(savedLevel)
+        //grab information and store in instance variables
         this.level_id = savedLevel['level_id']; this.score = savedLevel['score'];
         this.scoreToBeat = savedLevel['scoreToBeat']; this.turns = savedLevel['turns']; this.matrix = savedLevel['dimensions'];
         this.gridString = savedLevel['grid']; this.gridArray = this.gridString.split(" ");
@@ -168,12 +186,13 @@ export class GridComponent implements OnInit {
           }
 
         }
-        // c  onsole.log(this.scoreToBeat +" " + this.turns + this.matrix)
+        // console.log(this.scoreToBeat +" " + this.turns + this.matrix)
         this.checkGrid();
       })
       .catch((err) => {
+        //404 not found, make sure found is false so it loads default grid
         this.found = false;
-        console.log('error in find saved game component', err)
+        console.log('No saved game. loading default grid for level', err)
       })})
     .catch(err => {this.router.navigate([""])})
 
@@ -227,7 +246,8 @@ export class GridComponent implements OnInit {
 
     })
     }
-    //get levelleaderboard from database
+
+    //get top 3 levelleaderboard from database
     this.user_service.getLevelLeaderboard( +this.route.snapshot.queryParamMap.get('level'))
     .toPromise().then( (leaderboard) => {this.levelLeaderboard = leaderboard;console.log('getlevelleaderboard in grid compoennt');console.log(this.levelLeaderboard)})
     .catch((err) => {console.log('error in getlevel leaderboard componentts', err)})
@@ -248,6 +268,7 @@ export class GridComponent implements OnInit {
     .catch(err=> console.log("user logout error", err))
 
   }
+  //this is to save current user game information to resume later
   save(){
     console.log(this.matrix)
     console.log('tHIS IS MATRIX DIMENSION')
@@ -651,26 +672,36 @@ export class GridComponent implements OnInit {
         this.shiftCandy();
       }, 600);
     } else if (this.turns == 0) {
+
+      //had a bug where you could submit multiple game finishes if you played fast enough
+      //boolean solves this problem
       if(this.gameEnd == false){
+        //if score isnt greater than the score to beat, then you lose
         if (this.score >= this.scoreToBeat) {
           console.log('final score' + this.score)
           this.user.totalScore += this.score;
+          //update user global score
           this.user_service.updateUserScore(this.user, this.score)
           .toPromise().then(() => {
             console.log('got back from update user score')
+            //update the global leaderboard
             this.user_service.updateLeaderboard(this.level_id, this.user, this.score)
             .toPromise().then((content) => console.log(content))
             .catch( (err) => console.log('err in grid component afte update leaderboard', err))
+            //make sure to delete the user progress, so they dont keep playing from the same saved point
             this.user_service.deleteSavedLevel(this.level_id, this.user)
             .toPromise().then(result => console.log(result))
             .catch(err => console.log(err))
+            //once you finish once, makes ure you cant enter here again
             this.gameEnd = true;
+            //display you win box
             this.showDialog()
           })
           .catch((err) => console.log("error in remove candy show dialog", err))
         } else {
           console.log('final score' + this.score)
           this.gameEnd = true;
+          //display you lose box
           this.showDialogloose();
         }
       }
@@ -847,7 +878,7 @@ export class GridComponent implements OnInit {
 
   }
 
-
+//dialog boxes after game end
   showDialog() {
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);

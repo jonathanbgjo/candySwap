@@ -44,6 +44,7 @@ require('./routes/deleteUser')(app);
 require('./routes/updateLeaderboard')(app);
 require('./routes/saveLevel')(app);
 require('./routes/deleteSavedLevel')(app);
+require('./routes/createLevel')(app);
 app.listen(8000, () => {
   console.log('Server started!')
 });

@@ -82,6 +82,33 @@
  height: 60px;
 }
 
+.blackTiles {
+  //background: red;
+  background-image: url('src/assets/black.png');
+
+  background-repeat: no-repeat;
+  background-position: center-top;
+  width: 60px; // any width
+  height: 60px; // any height
+}
+.whiteTiles {
+  //background: red;
+  background-image: url('src/assets/white.png');
+
+  background-repeat: no-repeat;
+  background-position: center-top;
+  width: 60px; // any width
+  height: 60px; // any height
+}
+.brownTiles {
+  //background: red;
+  background-image: url('src/assets/brown.png');
+
+  background-repeat: no-repeat;
+  background-position: center-top;
+  width: 60px; // any width
+  height: 60px; // any height
+}
 .redTiles {
   //background: red;
   background-image: url('src/assets/redcolour.jpg');

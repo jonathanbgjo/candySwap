@@ -28,6 +28,9 @@ const routes: Routes = [
   {
     path:'grid/map',
     component:GridComponent
+  }, {
+    path:'createdMap',
+    component:MapComponent
   }
 ];
 

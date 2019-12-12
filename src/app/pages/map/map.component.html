@@ -5,54 +5,89 @@
           <h1 class="app-name has-gradient-text">Candy Crush</h1>
         </div>
       </div>
+      <div class ="session">
+      User in Session: <br>
+      &nbsp;&nbsp;&nbsp;ID: {{this.user.user_id}}  |&nbsp;USERNAME: {{this.user.username}} |&nbsp; EMAIL:{{this.user.email}} PASSWORD:  {{this.user.password}} | &nbsp;TOTAL SCORE: {{this.user.totalScore}} <br>
+      </div>
     </div>
+    <div >
+      <div class = "leaderboard">
+          <h3> TOP 5 LEADERBOARD </h3>
+          Email-ID-Score
 
+          <ol>
+            <li *ngFor= 'let user of topFive let idx= index'> <a href = "/user/{{this.user.user_id}}">{{this.user.email}}</a> {{this.user.user_id}} {{this.user.totalScore}}</li>
+          </ol>
+      </div>
+        <div class = 'users'>
+          <ul>
+              List of Users<li>Email-ID-Score</li>
+              <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{this.user.user_id}}">{{this.user.email}}</a> {{this.user.user_id}} {{this.user.totalScore}}</li>
+          </ul>
+        </div>
+    </div>
     <div class="board">
      <div class="board-bar">
        <!-- <p class="board-name"><a href routerLink="register">Register</a></p>-->
       </div>
       <div class="board-wrapper">
-          User in Session: <br>
-          ID: {{this.user.user_id}} <br> USERNAME: {{this.user.username}} <br> EMAIL:{{this.user.email}} <br>PASSWORD:  {{this.user.password}} <br> TOTAL SCORE: {{this.user.totalScore}} <br>
-          -------------------------------<br>
         <div class="grid_box board-rows">
-         <div class="level1">
-            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{level: 1}" class="button is-danger">Level1</button>
-         </div>
-
-         <div class="level2">
-            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{level: 2}" class="button is-danger">Level2</button>
-         </div>
-         <div class="level3">
-            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{level: 3}" class="button is-danger">Level3</button>
-         </div>
-         <div class="level4">
-            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{level: 4}" class="button is-danger">Level4</button>
-         </div>
-         <div class="level5">
-           <!-- alternatively we could just go to [routerLink]="['/grid/map/:id'] and grab from req.params -->
-            <button type="submit" [routerLink]="['/grid/map']"  [queryParams]="{level: 5}" class="button is-danger">Level5</button>
-         </div>
-         <h3> TOP 5 LEADERBOARD</h3>
-        <ul>
-          <li>Email-ID-Score</li>
-          <li *ngFor= 'let user of topFive let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}} {{user.totalScore}}</li>
-        </ul>
+          <h3> LEVELS</h3>
+            <div class="btn-group">
+                <li *ngFor= 'let level of levels let idx = index'>
+                  <button type="submit"[routerLink]="['/grid/map']"  [queryParams]='{level: level.level_id}'  class="button is-danger"> Level {{idx+1}}</button>
+                </li>
+            </div>
         </div>
+
+
+
       </div>
-      <ul>
-          List of Users<li>Email-ID-Score</li>
-          <li *ngFor= 'let user of users let idx= index'> <a href = "/user/{{user.user_id}}">{{user.email}}</a> {{user.user_id}} {{user.totalScore}}</li>
-      </ul>
+
+
+<div class="board-wrapper">
+    <form  (submit)="createLevel()" #loginForm="ngForm">
+         <br>
+        <div class="field">
+            <p> Dimensions</p>
+            <input type="range" min="5" max="9" class="input" [(ngModel)]="this.new_level.dimensions" name="dimensions">           {{ new_level.dimensions }}
+        </div>
+        <div class="field1">
+            <p> # of Colors</p>
+            <input type="range" min="5" max="8" class="input" [(ngModel)]="this.new_level.numColors" name="numColors">             {{ new_level.numColors }}
+
+
+        </div>
+        <br> <p></p>
+        <div class="field2">
+          <p># of turns </p>
+          <input type="range" min="5" max="15" class="input" [(ngModel)]="this.new_level.numTurns" name="numTurns">         {{ new_level.numTurns }}
+
+        </div>
+
+        <div class="field3">
+            <p> Score To Beat </p>
+            <input type="range" min="10" max="250" class="input" [(ngModel)]="this.new_level.scoreToBeat" name="scoreToBeat">          {{ new_level.scoreToBeat }}
+
+        </div>
+
+        <div class="login-button">
+            <button type="submit" class="button is-danger">Create Level!</button>
+        </div>
+    </form>
+</div>
+</div>
 ----------------------------- <br>
-      <a href ='/logout'>logout</a>
-      <form (submit)="logout()" #loginForm="ngForm">
-        <button type="submit" class="button is-danger">Logout</button>
-      </form>
+<div class='logoutButton'>
+    <a href ='/logout'>logout</a>
+    <form (submit)="logout()" #loginForm="ngForm">
+      <button type="submit" class="button is-danger">Logout</button>
+    </form>
+</div>
+
 ------------------------------
+</div>
 
 
-
-    </div>
 
 

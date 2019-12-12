@@ -51,90 +51,40 @@
   height: 440px;
   background: rgba(white,0.5);
 }
-.level1{
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 50%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
   margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
+
 
 }
-.level2{
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
+
+.btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+.btn-group li {
+  list-style-type: none;
+}
+
+.users{
+  float:right;
 
 }
-.level3{
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
+.leaderboard{
+  float:right;
+
 }
-.level4{
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-}
-.level5{
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-}
-.level1:after {
-  content: "";
-  background-color: #000;
-  position: absolute;
-  width: 3px;
-  height: 100px;
-  top: 40px;
-  left: 47%;
-  display: block;
-}
-.level2:after {
-  content: "";
-  background-color: #000;
-  position: absolute;
-  width: 3px;
-  height: 100px;
- // top: 40px;
-  left: 47%;
-  display: block;
-}
-.level3:after {
-  content: "";
-  background-color: #000;
-  position: absolute;
-  width: 3px;
-  height: 100px;
- // top: 40px;
-  left: 47%;
-  display: block;
-}
-.level4:after {
-  content: "";
-  background-color: #000;
-  position: absolute;
-  width: 3px;
-  height: 100px;
- // top: 40px;
-  left: 47%;
-  display: block;
+.session{
+  color: pink;
 }

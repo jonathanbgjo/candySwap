@@ -5,5 +5,8 @@ export enum CandyType {
     nocolor="nocolor",
     yellow="yellow",
     violet="violet",
-    orange="orange"
+    orange="orange",
+    black = 'black',
+    white = 'white',
+    brown = 'brown'
 }
