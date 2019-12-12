@@ -5,16 +5,3 @@ module.exports = (sequelize, type) => {
   )
   return LevelLeaderboard;
 };
-
-
-
-
-
-// level_id: {
-//   type: type.INTEGER,
-//   foreignKey: true,
-// },
-// level_id: {
-//   type: type.INTEGER,
-//   foreignKey: true,
-// },

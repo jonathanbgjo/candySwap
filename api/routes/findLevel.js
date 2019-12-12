@@ -4,8 +4,6 @@ var SavedLevel = sequelize.SavedLevel;
 
 module.exports = (app) => {
     app.get('/level/:id', (req,res) =>{
-      // console.log('in get one level route')
-      // console.log(req.params.id)
       if(req.params.id){
         Level.findOne({
           where:{
@@ -13,8 +11,6 @@ module.exports = (app) => {
           }
         }).then(level => {
           if(level != null){
-            // console.log('found level in DB')
-            // console.log(level);
             res.status(200).json(level);
           }
           else{
@@ -31,8 +27,6 @@ module.exports = (app) => {
 
 
     app.get('/level/:level_id/:user_id', (req,res) =>{
-      console.log('in get one savedlevel route')
-      // console.log(req.params.id)
       if(req.params.level_id && req.params.user_id){
         SavedLevel.findOne({
           where:{

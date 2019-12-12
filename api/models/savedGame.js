@@ -20,15 +20,3 @@ module.exports = (sequelize, type) => {
   })
 };
 
-
-
-
-
-// level_id: {
-//   type: type.INTEGER,
-//   foreignKey: true,
-// },
-// level_id: {
-//   type: type.INTEGER,
-//   foreignKey: true,
-// },

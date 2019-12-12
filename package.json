@@ -33,6 +33,7 @@
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.3",
     "sequelize": "^5.21.2",
+    "styled-components": "^4.4.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

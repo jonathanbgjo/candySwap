@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Inject } from '@angular/core';
 
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { User } from './models/user';
-import {Level} from './models/level';
+import { Level } from './models/level';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { SavedLevel} from './models/savedLevel'
+import { SavedLevel } from './models/savedLevel'
 
 @Injectable({
   providedIn: 'root',
@@ -17,64 +17,51 @@ import { SavedLevel} from './models/savedLevel'
 })
 export class AppService {
 
-  constructor(private http: HttpClient,  @Inject(MatDialog) public dialog: MatDialog) { }
-  // register(new_user: User){
-  //   return this.http.post("/register", new_user).map(data => data).toPromise()
-  // }
-  login(user: User): Observable<User>{
-    // console.log("reach login in service");
+  constructor(private http: HttpClient, @Inject(MatDialog) public dialog: MatDialog) { }
+
+  login(user: User): Observable<User> {
     return this.http.post<User>('http://localhost:8000/login', user);
   }
-  logged(): Observable<User>{
-    // console.log("reached logged in service");
+  logged(): Observable<User> {
     return this.http.get<User>('http://localhost:8000/logged');
   }
-  logout(){
-    // console.log("in logout service")
+  logout() {
     return this.http.get('http://localhost:8000/logout');
   }
 
-  register(new_user: User): Observable<User>{
-    // console.log("register reach service?")
+  register(new_user: User): Observable<User> {
     return this.http.post<User>('http://localhost:8000/register', new_user)
   }
-  createLevel(new_level: Level): Observable<Level>{
+  createLevel(new_level: Level): Observable<Level> {
     return this.http.post<Level>('http://localhost:8000/level', new_level)
   }
 
 
 
-  getAllUsers(): Observable<User[]>{
+  getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:8000/api/users')
   }
-  getAllLevels(): Observable<Level[]>{
+  getAllLevels(): Observable<Level[]> {
     return this.http.get<Level[]>('http://localhost:8000/levels')
 
   }
-  findTopFive(): Observable<User[]>{
+  findTopFive(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:8000/topFive')
   }
-  getLevelLeaderboard(level_id: number){
-    console.log('in get leaderboard service')
+  getLevelLeaderboard(level_id: number) {
     return this.http.get('http://localhost:8000/api/levelLeaderboard/' + level_id);
   }
 
 
 
-  getUser(user_id: number): Observable<User>{
-    // console.log("in get one user service");
+  getUser(user_id: number): Observable<User> {
     return this.http.get<User>('http://localhost:8000/user/' + user_id)
   }
-  getSavedLevel(level_id: number, user: User){
-    console.log('in get level service')
-    // console.log(level_id)
-
-    return this.http.get('http://localhost:8000/level/' + level_id + "/" +user.user_id)
+  getSavedLevel(level_id: number, user: User) {
+    return this.http.get('http://localhost:8000/level/' + level_id + "/" + user.user_id)
 
   }
-  getLevel(level_id: number): Observable<Level>{
-    console.log('in get level service')
-    // console.log(level_id)
+  getLevel(level_id: number): Observable<Level> {
     return this.http.get<Level>('http://localhost:8000/level/' + level_id)
 
   }
@@ -82,38 +69,25 @@ export class AppService {
 
 
   updateUser(user: User): Observable<User> {
-    console.log("in update service")
-    // console.log(user.user_id);
     return this.http.put<User>('http://localhost:8000/user/' + user.user_id, user)
   }
   updateUserScore(user: User, score: number): Observable<User> {
-    console.log("in update score service")
-    // console.log(user)
-    // console.log(score);
-    // console.log(user.user_id);
-    return this.http.put<User>('http://localhost:8000/user/score/' + user.user_id, {user, score})
+    return this.http.put<User>('http://localhost:8000/user/score/' + user.user_id, { user, score })
   }
-  updateLeaderboard(level_id: number, user: User, score: Number):Observable<User>{
-    // console.log('in update leaderboard service')
-    // console.log(level_id, user, score);
-
-    return this.http.post<User>('http://localhost:8000/leaderboard/' + level_id, {user,score});
+  updateLeaderboard(level_id: number, user: User, score: Number): Observable<User> {
+    return this.http.post<User>('http://localhost:8000/leaderboard/' + level_id, { user, score });
   }
-  saveLevel(level_id: number ,user: User, dimensions: number, turns: number, score: number, scoreToBeat: number, savedGrid:String){
-    console.log('in saveLevel service')
-    console.log(dimensions)
-    return this.http.post('http://localhost:8000/saveLevel/' + level_id, {user,score,dimensions,turns, scoreToBeat, savedGrid});
+  saveLevel(level_id: number, user: User, dimensions: number, turns: number, score: number, scoreToBeat: number, savedGrid: String) {
+    return this.http.post('http://localhost:8000/saveLevel/' + level_id, { user, score, dimensions, turns, scoreToBeat, savedGrid });
     //wrap what you want to send in body in the {} after url
   }
 
 
-  deleteUser(user: User):Observable<User>{
-    // console.log("delete service")
+  deleteUser(user: User): Observable<User> {
     return this.http.delete<User>('http://localhost:8000/user/' + user.user_id)
   }
-  deleteSavedLevel(level_id: number, user: User):Observable<User>{
-    // console.log("delete service")
-    return this.http.delete<User>('http://localhost:8000/level/' + level_id +"/" + user.user_id)
+  deleteSavedLevel(level_id: number, user: User): Observable<User> {
+    return this.http.delete<User>('http://localhost:8000/level/' + level_id + "/" + user.user_id)
   }
 
 }

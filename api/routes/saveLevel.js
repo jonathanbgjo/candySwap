@@ -3,8 +3,7 @@ var SavedLevel = sequelize.SavedLevel;
 
 module.exports = (app) => {
   app.post('/saveLevel/:id', (req, res, next) => {
-    console.log("save Level route");
-    console.log(req)
+    //find a saved level based on level_id and user_id, or otherwise just create new one and save into db.
     SavedLevel.findOne({
       where: {level_id: req.params.id, user_id: req.body.user.user_id}
     }).then(content => {

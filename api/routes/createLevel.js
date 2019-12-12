@@ -7,15 +7,14 @@ var Level = sequelize.Level;
 
 module.exports = (app) => {
   app.post('/level', (req,res)=>{
-    // console.log("are we in register?")
-    //console.log(req);
+    //store data into data object
     const data = {
           dimensions: req.body.dimensions,
           grid : req.body.grid,
           numTurns : req.body.numTurns,
           scoreToBeat : req.body.scoreToBeat
     };
-    // console.log(data.username + data.email + data.password);
+    //create new level and send id back
     Level.create({turns: data.numTurns, dimensions: data.dimensions, scoreToBeat: data.scoreToBeat, grid:data.grid, createdAt: new Date(), updatedAt: new Date()})
     .then((level) => res.json(level.level_id))
     .catch(([level, created]) => {

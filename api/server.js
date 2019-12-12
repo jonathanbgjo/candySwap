@@ -12,8 +12,6 @@ const app = express()
 // var router = express.Router();
 // router.use(cors(options));
 
-//var session = require("express-session")
-
 const bodyParser = require('body-parser')
 
 

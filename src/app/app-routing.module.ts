@@ -3,34 +3,35 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainViewComponent } from './pages/main-view/main-view.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { GridComponent } from './pages/grid/grid.component';
-import { UserComponent} from './pages/user/user.component';
-import { MapComponent} from './pages/map/map.component';
+import { UserComponent } from './pages/user/user.component';
+import { MapComponent } from './pages/map/map.component';
 const routes: Routes = [
   {
-    path:'register',
-    component:RegisterComponent
-  },
-  { path: '',
-    component : MainViewComponent
+    path: 'register',
+    component: RegisterComponent
   },
   {
-    path:'logout',
-    component : MainViewComponent
+    path: '',
+    component: MainViewComponent
   },
   {
-    path:'user/:user_id',
+    path: 'logout',
+    component: MainViewComponent
+  },
+  {
+    path: 'user/:user_id',
     component: UserComponent
   }, {
-    path:'map',
-    component:MapComponent
+    path: 'map',
+    component: MapComponent
   },
 
   {
-    path:'grid/map',
-    component:GridComponent
+    path: 'grid/map',
+    component: GridComponent
   }, {
-    path:'createdMap',
-    component:MapComponent
+    path: 'createdMap',
+    component: MapComponent
   }
 ];
 

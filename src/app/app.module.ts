@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainViewComponent } from './pages/main-view/main-view.component';
 
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RegisterComponent } from './pages/register/register.component';
 import { GridComponent } from './pages/grid/grid.component';
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule }   from '@angular/forms';
-import { AppService} from './app.service';
+import { FormsModule } from '@angular/forms';
+import { AppService } from './app.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from './pages/user/user.component';
@@ -22,7 +22,7 @@ import { MatButtonModule, MatDialogModule } from '@angular/material';
 import { MapComponent } from './pages/map/map.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
+  overrides = <any>{
     swipe: { direction: Hammer.DIRECTION_ALL },
   };
 }
@@ -54,8 +54,10 @@ export class MyHammerConfig extends HammerGestureConfig {
     DialoglooseComponent,
   ],
   providers: [AppService,
-    {provide: HAMMER_GESTURE_CONFIG,
-    useClass: MyHammerConfig}],
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
