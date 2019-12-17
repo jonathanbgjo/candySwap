@@ -11,7 +11,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: '',
+    path: 'https://color-swap.herokuapp.com/',
     component: MainViewComponent
   },
   {

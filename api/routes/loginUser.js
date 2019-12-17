@@ -21,6 +21,7 @@ module.exports = (app) => {
           if (user != null) {
               if(req.body.password === user.password){
                 //consider session.save()
+                req.session.user = user;
                 session.user = user;
                 res.status(200).json(session.user);
             }else {
@@ -58,6 +59,8 @@ module.exports = (app) => {
 
   app.get('/logout', (req,res) => {
     session.user = null;
+    console.log(req.sessionStore);
+    console.log(req.sessionStore.MemoryStore = null)
     res.status(200).json(true);
   })
 }

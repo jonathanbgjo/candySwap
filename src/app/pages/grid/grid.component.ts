@@ -307,7 +307,6 @@ export class GridComponent implements OnInit {
       rightSideCandy.y -= 1
     } else {
       this.turns--
-      console.log(this.turns)
       setTimeout(() => {
         this.shiftCandy();
       }, 600);
@@ -390,7 +389,6 @@ export class GridComponent implements OnInit {
     var success = this.localCheck(0, candy.x, candy.y, 0, candy.type);
     var success2 = this.localCheck(0, candy.x + 1, candy.y, 0, this.board.grid[candy.x + 1][candy.y].type);
     if (success == 0 && success2 == 0) {
-      console.log(success);
       var currentCandy = this.board.grid[candy.x][candy.y]
       var candyBelowCurrent = this.board.grid[candy.x + 1][candy.y]
 
@@ -637,7 +635,7 @@ export class GridComponent implements OnInit {
       }
       if (hcount >= 3) {
         for (let j = 0; j < hArr.length; j++) {
-          console.log(1)
+          // console.log(1)
           removeCandyArr.push(hArr[j]);
         }
       }
@@ -649,7 +647,7 @@ export class GridComponent implements OnInit {
     for (let i = 0; i < this.numOfRows; i++) {
       if (vdict[i][1] >= 3) {
         for (let j = 0; j < vdict[i][2].length; j++) {
-          console.log(2);
+          // console.log(2);
           removeCandyArr.push(vdict[i][2][j]);
         }
       }
@@ -657,7 +655,7 @@ export class GridComponent implements OnInit {
     //final checker to see if last element makes a 3 or more in a horizontal row
     if (hcount >= 3) {
       for (let j = 0; j < hArr.length; j++) {
-        console.log(3);
+        // console.log(3);
         removeCandyArr.push(hArr[j]);
       }
     }
@@ -678,7 +676,7 @@ export class GridComponent implements OnInit {
         this.board.grid[newRemoveCandyArr[i][0]][newRemoveCandyArr[i][1]].type = CandyType.nocolor;
         this.score++;
       }
-      console.log(this.score)
+      // console.log(this.score)
       setTimeout(() => {
         this.shiftCandy();
       }, 600);
@@ -720,7 +718,6 @@ export class GridComponent implements OnInit {
           this.showDialogloose();
         }
       }
-
     } else this.checkValidGrid();
   }
   public wait(ms) {
@@ -732,7 +729,7 @@ export class GridComponent implements OnInit {
   }
   public slideDown(x: number, y: number) {
     var temp = "" + x + y
-    console.log(temp)
+    // console.log(temp)
     // document.getElementById(temp).animate([
     //   {transform: 'translateY(-75%)'},
     //   { transform: 'translateY(0%)'}
