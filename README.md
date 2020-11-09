@@ -1,33 +1,3 @@
-# CandyCrush
+# CandySwap
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Nodemon
-Run `nodemon server.js` or `node server.js` in the project folder. It should run on 'http://localhost:8000/'. The app will automatically reload if you change any of the server files.
-Should also need `npm install sequelize`
-
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# candySwap
+Candy Crush mimic that includes basic login/registration functionality. This project currently can initialize 2D grid with random candies based off Level information in DB (dimensions, turns, score to beat). You are able to swap candies to increase score and grid will automatically shift if there is a match. You have a certain amount of turns to reach a specific score or you lose. Implemented a possible swap check that scans whole 2d grid for a potential swap (otherwise shuffle so game can continue). Successfully added the save game functionality which will save the grid, turns, and score for any user on any level.  Future implementations include more difficulties (grid size, obstacles, different objectives), special candies.
